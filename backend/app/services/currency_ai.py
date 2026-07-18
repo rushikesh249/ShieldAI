@@ -210,23 +210,27 @@ class CurrencyAIService:
         # 7. Map to Frontend Schema
         if threat_level in ("Safe", "Caution"):
             risk_level = "Low Risk"
+            frontend_confidence = 100 - final_score
         elif threat_level == "Suspicious":
             risk_level = "Review Recommended"
+            # Keep confidence around 50-70 for review
+            frontend_confidence = max(50, final_score)
         else:
             risk_level = "High Risk"
+            frontend_confidence = final_score
             
         total_time = (time.perf_counter() - start_total) * 1000
         
         # Metadata Logging
         logger.info(
             "Currency Analysis Complete | tf_time=%.1fms | gemini_time=%.1fms | total_time=%.1fms | tf_pred=%s | risk_level=%s | conf=%d",
-            tf_time, gemini_time, total_time, tf_pred, risk_level, final_score
+            tf_time, gemini_time, total_time, tf_pred, risk_level, frontend_confidence
         )
         
         return {
             "id": f"cur_{uuid.uuid4().hex[:8]}",
             "riskLevel": risk_level,
-            "confidenceScore": final_score,
+            "confidenceScore": frontend_confidence,
             "features": gemini_features,
             "evidence": gemini_evidence + recommendations,
             "timestamp": datetime.datetime.now().isoformat()
