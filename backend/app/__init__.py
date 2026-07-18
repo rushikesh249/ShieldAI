@@ -25,6 +25,8 @@ from app.api.network import router as network_router
 from app.api.geo import router as geo_router
 from app.api.dashboard import router as dashboard_router
 from app.api.auth import router as auth_router
+from app.api.history import router as history_router
+from app.api.admin import router as admin_router
 
 
 logger = get_logger("shieldai.app")
@@ -78,6 +80,8 @@ def create_app() -> FastAPI:
 
     # ── Middleware (order matters: outermost → innermost) ─
     setup_cors(app)
+    from app.middleware.rate_limit import RateLimitingMiddleware
+    app.add_middleware(RateLimitingMiddleware)
     app.add_middleware(RequestLoggingMiddleware)
 
     # ── Exception Handlers ───────────────────────────────
@@ -93,5 +97,7 @@ def create_app() -> FastAPI:
     app.include_router(geo_router, prefix=api_prefix)
     app.include_router(dashboard_router, prefix=api_prefix)
     app.include_router(auth_router, prefix=api_prefix)
+    app.include_router(history_router, prefix=api_prefix)
+    app.include_router(admin_router, prefix=api_prefix)
 
     return app

@@ -1,47 +1,64 @@
 {
-  "level": "Critical",
-  "score": 95,
-  "confidence": 98,
-  "category": "Job Scam",
-  "assessment": "The communication is a classic Job Scam. It uses high-paying, low-effort promises ('Earn \u20b95000 daily working from home' by 'liking YouTube videos') to lure victims. Crucially, it demands an upfront 'refundable registration fee' of \u20b9999 to access tasks, which is a primary indicator of advance-fee fraud. Legitimate employers never charge fees to start working.",
-  "evidence": [
+  "id": "test_id",
+  "status": "Genuine",
+  "confidence": 95,
+  "risk_level": "Low",
+  "detected_features": [
+    "Mahatma Gandhi Portrait",
+    "Windowed Security Thread"
+  ],
+  "missing_features": [],
+  "authenticity_checks": [
     {
-      "label": "Upfront Registration Fee",
-      "severity": "Critical",
-      "explanation": "Demanding a payment of \u20b9999 under the guise of a 'refundable registration fee' before providing work is a major red flag for advance-fee fraud."
-    },
-    {
-      "label": "Unrealistic Financial Promise",
-      "severity": "High",
-      "explanation": "Promising \u20b95000 daily for simple tasks like liking YouTube videos is economically unviable and designed to exploit financial vulnerability."
-    },
-    {
-      "label": "Task-Based Scam Pattern",
-      "severity": "High",
-      "explanation": "The 'like YouTube videos' model is a widely documented scam format where victims are initially paid small amounts to build trust, then coerced into investing larger sums."
+      "check_name": "Official Bank Issuance",
+      "passed": true,
+      "detected": "RESERVE BANK OF INDIA",
+      "expected": "RESERVE BANK OF INDIA"
     }
   ],
-  "entities": [
+  "reason": "Note matches all expected RBI security features and text markings.",
+  "recommendation": "Accept the note.",
+  "limitations": "Standard visual scan limitations apply.",
+  "extracted_text": "RESERVE BANK OF INDIA RBI भारतीय रिज़र्व बैंक FIVE HUNDRED RUPEES I Promise to Pay Governor",
+  "riskLevel": "Low Risk",
+  "confidenceScore": 95,
+  "confidence_score": 95,
+  "detectedFeatures": [
+    "Mahatma Gandhi Portrait",
+    "Windowed Security Thread"
+  ],
+  "missingFeatures": [],
+  "authenticityChecks": [
     {
-      "type": "Claimed Earnings",
-      "value": "\u20b95000 daily",
-      "copyable": true
-    },
-    {
-      "type": "Upfront Fee",
-      "value": "\u20b9999",
-      "copyable": true
-    },
-    {
-      "type": "Platform",
-      "value": "WhatsApp",
-      "copyable": true
+      "check_name": "Official Bank Issuance",
+      "passed": true,
+      "detected": "RESERVE BANK OF INDIA",
+      "expected": "RESERVE BANK OF INDIA"
     }
   ],
-  "recommendations": [
-    "Do not pay any upfront processing fees, taxes, or security deposits.",
-    "Stop communicating with the sender and block their number.",
-    "Do NOT share OTPs, PINs, or passwords with anyone.",
-    "Do NOT transfer any money or provide payment details."
-  ]
+  "genuineIndicators": [],
+  "genuine_indicators": [],
+  "counterfeitIndicators": [],
+  "counterfeit_indicators": [],
+  "authenticitySummary": null,
+  "authenticity_summary": null,
+  "evidence": [],
+  "features": [
+    {
+      "id": "sec_thread",
+      "name": "Windowed Security Thread",
+      "status": "Consistent",
+      "observation": "Thread is present and shifts colour correctly.",
+      "confidence": null,
+      "bounding_box": null
+    }
+  ],
+  "denomination": null,
+  "serial_number": null,
+  "serialNumber": null,
+  "processing_time": null,
+  "processingTime": null,
+  "image_url": null,
+  "imageUrl": null,
+  "timestamp": "2026-01-01T00:00:00Z"
 }

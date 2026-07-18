@@ -136,3 +136,46 @@ html {
     linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
+
+/* ── Professional PDF Print Stylesheet ── */
+@media print {
+  body, html, main, #__next {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  
+  /* Hide navigation, footer, actions, and side inputs */
+  nav, footer, button, select, input, .print\:hidden, [class*="print-hide"] {
+    display: none !important;
+  }
+
+  /* Make workspace columns stack cleanly or lay out full-width */
+  .grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  /* Ensure background colors and borders show up in printed PDF */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .border, [class*="border-"] {
+    border-color: #d1d5db !important;
+  }
+  
+  .bg-shield-navy-light\/50, .bg-shield-navy\/40, .bg-shield-navy\/20 {
+    background-color: #f3f4f6 !important;
+  }
+  
+  .text-white, .text-slate-100, .text-slate-200 {
+    color: #111827 !important;
+  }
+
+  .text-shield-muted {
+    color: #4b5563 !important;
+  }
+}
+

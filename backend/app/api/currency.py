@@ -120,13 +120,17 @@ async def analyze_currency(
         session_obj = CurrencyAnalysisResult(**verdict)
         session_store.save_dataset(session_obj)
         
+        # Save scan to database for history
+        from app.db.database import save_scan
+        save_scan(session_obj.model_dump(mode="json"))
+        
         duration_ms = (time.perf_counter() - start_time) * 1000
         logger.info(
             "API Route Complete | route=/currency/analyze | duration=%.1fms", duration_ms
         )
         
         return success_response(
-            data=verdict,
+            data=session_obj.model_dump(mode="json"),
             message="Currency analysis complete.",
             request=request,
         )
@@ -135,3 +139,84 @@ async def analyze_currency(
     except Exception as e:
         logger.exception("Currency analysis failed")
         return error_response(message="Failed to analyze currency.", status_code=500, request=request)
+
+
+@router.post(
+    "/counterfeit-detection",
+    summary="Counterfeit Indian Currency Detection",
+    description="Full production-ready endpoint that preprocesses the note (blur check, perspective crop, contrast enhance) and runs AI-assisted verification.",
+)
+async def counterfeit_detection(
+    request: Request,
+    file: UploadFile = File(..., description="Currency note image (PNG, JPG, JPEG, WEBP)"),
+    denomination: str = Form("₹500", description="Note denomination (e.g. ₹500)"),
+    note_side: str = Form("Front", description="Front or Reverse side"),
+):
+    """Secure endpoint for counterfeit note identification with image preprocessing."""
+    start_time = time.perf_counter()
+    try:
+        # 1. Save uploaded file securely
+        file_path = await save_upload_file(file, allowed_categories=["image"])
+        
+        # 2. Run image preprocessing (blur check, metadata strip, crop, perspective, CLAHE)
+        from app.services.image_processing import ImagePreprocessor
+        try:
+            processed_path = ImagePreprocessor.preprocess(file_path)
+        except ValueError as blur_err:
+            return error_response(
+                message=str(blur_err),
+                status_code=400,
+                request=request,
+                errors=[{"field": "file", "message": str(blur_err), "type": "blur"}]
+            )
+            
+        # 3. Analyze preprocessed image using AI Service
+        mime_type = file.content_type or "image/jpeg"
+        verdict = currency_ai_service.analyze(processed_path, mime_type, denomination)
+        
+        # 4. Save session to shared store
+        session_obj = CurrencyAnalysisResult(**verdict)
+        session_store.save_dataset(session_obj)
+        
+        # 5. Extract Serial Number from features
+        serial_number = "Not detected"
+        for feature in verdict.get("features", []):
+            if feature.get("id") == "serial_number":
+                obs = feature.get("observation", "")
+                import re
+                match = re.search(r'\b([0-9][A-Z]{2}\s*\d{6}|[A-Z0-9]{8,10})\b', obs, re.IGNORECASE)
+                if match:
+                    serial_number = match.group(1).replace(" ", "").upper()
+                else:
+                    words = re.findall(r'\b[A-Z0-9]{7,10}\b', obs, re.IGNORECASE)
+                    if words:
+                        serial_number = words[0].upper()
+                break
+        
+        processing_time_sec = time.perf_counter() - start_time
+        
+        # Update extra metadata fields in the session object
+        session_obj.denomination = denomination
+        session_obj.serial_number = serial_number
+        session_obj.serialNumber = serial_number
+        session_obj.processing_time = f"{processing_time_sec:.1f} sec"
+        session_obj.processingTime = f"{processing_time_sec:.1f} sec"
+        session_obj.image_url = str(processed_path.name)
+        session_obj.imageUrl = str(processed_path.name)
+        
+        # Save scan to database for history
+        from app.db.database import save_scan
+        save_scan(session_obj.model_dump(mode="json"))
+        
+        return success_response(
+            data=session_obj.model_dump(mode="json"),
+            message="Currency counterfeit detection complete.",
+            request=request,
+        )
+    except ValueError as val_err:
+        return error_response(message=str(val_err), status_code=400, request=request)
+    except Exception as e:
+        logger.exception("Counterfeit detection failed")
+        return error_response(message="Failed to analyze currency counterfeit status.", status_code=500, request=request)
+
+

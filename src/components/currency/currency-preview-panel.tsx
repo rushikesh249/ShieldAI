@@ -79,10 +79,17 @@ export function CurrencyPreviewPanel({ state, result, imageUrl, onRemoveImage }:
               {/* Overlays */}
               {isComplete && result && (
                 <div className="absolute inset-0 pointer-events-none">
-                  {/* Fake fixed overlays mapped over the image to simulate detections */}
+                  {/* Dynamic overlays mapped from Gemini feature detection bounding boxes */}
                   {result.features.map((feature, idx) => {
-                    const top = 20 + (idx * 25);
-                    const left = 10 + (idx * 30);
+                    const hasBox = feature.boundingBox && 
+                      typeof feature.boundingBox.x === 'number' && 
+                      typeof feature.boundingBox.y === 'number';
+                    
+                    // Fallback to staggered grid if boundingBox is missing
+                    const top = hasBox ? feature.boundingBox!.y * 100 : (15 + (idx * 20) % 70);
+                    const left = hasBox ? feature.boundingBox!.x * 100 : (10 + (idx * 25) % 65);
+                    const width = hasBox ? feature.boundingBox!.width * 100 : 25;
+                    const height = hasBox ? feature.boundingBox!.height * 100 : 15;
                     
                     let borderColor = "border-green-400";
                     let bgColor = "bg-green-400/20";
@@ -105,11 +112,13 @@ export function CurrencyPreviewPanel({ state, result, imageUrl, onRemoveImage }:
                         style={{
                           top: `${top}%`,
                           left: `${left}%`,
-                          width: '120px',
-                          height: '60px',
+                          width: `${width}%`,
+                          height: `${height}%`,
+                          minWidth: '50px',
+                          minHeight: '30px'
                         }}
                       >
-                        <span className={`absolute -top-6 left-0 whitespace-nowrap rounded bg-shield-navy/90 px-2 py-0.5 text-[10px] font-bold ${textColor} ring-1 ring-inset ring-current`}>
+                        <span className={`absolute -top-6 left-0 whitespace-nowrap rounded bg-shield-navy/90 px-2 py-0.5 text-[9px] font-bold ${textColor} ring-1 ring-inset ring-current`}>
                           {feature.name}
                         </span>
                       </div>

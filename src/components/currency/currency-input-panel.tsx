@@ -12,7 +12,7 @@ interface Props {
   isAnalyzing: boolean
 }
 
-const DENOMINATIONS: CurrencyDenomination[] = ["₹100", "₹200", "₹500", "₹2000"]
+const DENOMINATIONS: CurrencyDenomination[] = ["₹10", "₹20", "₹50", "₹100", "₹200", "₹500", "₹2000"]
 const NOTE_SIDES: CurrencyNoteSide[] = ["Front", "Reverse"]
 const CAPTURE_TYPES: CaptureType[] = ["Single Image", "Front + Reverse"]
 

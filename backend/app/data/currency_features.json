@@ -1,90 +1,412 @@
 {
-  "₹100": [
+  "₹10": [
     {
       "id": "sec_thread",
       "name": "Windowed Security Thread",
-      "description": "Colour shift from green to blue when tilted. Contains 'Bharat' and 'RBI'."
+      "description": "Windowed security thread with demetalised 'RBI' and 'Bharat' (in Devanagari). On the reverse, the thread appears as a continuous stripe.",
+      "genuine_indicator": "Thread contains legible 'RBI/Bharat' text under magnification."
     },
     {
       "id": "watermark",
       "name": "Mahatma Gandhi Watermark",
-      "description": "Electrotype (100) watermark alongside Gandhi portrait."
+      "description": "Mahatma Gandhi portrait watermark and electrotype '10' watermark visible when held to light.",
+      "genuine_indicator": "Gandhi portrait and electrotype '10' visible under transmitted light."
+    },
+    {
+      "id": "ashoka_pillar",
+      "name": "Ashoka Pillar Emblem",
+      "description": "Ashoka Pillar emblem printed on the right front side of the note.",
+      "genuine_indicator": "Ashoka Pillar emblem is sharp, distinct, and correctly aligned."
+    },
+    {
+      "id": "see_through_register",
+      "name": "See-Through Register",
+      "description": "Denominational numeral '10' prints front and back and aligns perfectly when held to light.",
+      "genuine_indicator": "Perfect registration of the numeral '10' when held to light."
+    },
+    {
+      "id": "serial_number",
+      "name": "Serial Number",
+      "description": "Serial numbers in two panels with ascending font size.",
+      "genuine_indicator": "Numerals increase in size left to right; fluorescent under UV."
+    },
+    {
+      "id": "motif",
+      "name": "Motif — Sun Temple, Konark",
+      "description": "Features the Sun Temple, Konark motif on the reverse side.",
+      "genuine_indicator": "Konark Sun Temple wheel motif is sharp and clearly defined."
+    }
+  ],
+  "₹20": [
+    {
+      "id": "sec_thread",
+      "name": "Windowed Security Thread",
+      "description": "Windowed security thread with Devanagari 'Bharat' and 'RBI'.",
+      "genuine_indicator": "Thread is continuous under light with distinct lettering."
+    },
+    {
+      "id": "watermark",
+      "name": "Mahatma Gandhi Watermark",
+      "description": "Mahatma Gandhi portrait watermark and electrotype '20' watermark visible when held to light.",
+      "genuine_indicator": "Gandhi portrait and electrotype '20' visible under transmitted light."
+    },
+    {
+      "id": "ashoka_pillar",
+      "name": "Ashoka Pillar Emblem",
+      "description": "Ashoka Pillar emblem printed on the right front side of the note.",
+      "genuine_indicator": "Ashoka Pillar emblem is sharp, distinct, and correctly aligned."
+    },
+    {
+      "id": "see_through_register",
+      "name": "See-Through Register",
+      "description": "Denominational numeral '20' prints front and back and aligns perfectly when held to light.",
+      "genuine_indicator": "Perfect registration of the numeral '20' when held to light."
+    },
+    {
+      "id": "serial_number",
+      "name": "Serial Number",
+      "description": "Serial numbers in two panels with ascending font size.",
+      "genuine_indicator": "Numerals increase in size left to right; fluorescent under UV."
+    },
+    {
+      "id": "motif",
+      "name": "Motif — Ellora Caves",
+      "description": "Features Ellora Caves motif on the reverse side of the note.",
+      "genuine_indicator": "Ellora Caves motif is sharp and clearly defined."
+    }
+  ],
+  "₹50": [
+    {
+      "id": "sec_thread",
+      "name": "Windowed Security Thread",
+      "description": "Windowed security thread with Devanagari 'Bharat' and 'RBI'.",
+      "genuine_indicator": "Thread contains legible Devanagari 'Bharat' and 'RBI' text."
+    },
+    {
+      "id": "watermark",
+      "name": "Mahatma Gandhi Watermark",
+      "description": "Mahatma Gandhi portrait watermark and electrotype '50' watermark visible when held to light.",
+      "genuine_indicator": "Gandhi portrait and electrotype '50' visible under transmitted light."
+    },
+    {
+      "id": "ashoka_pillar",
+      "name": "Ashoka Pillar Emblem",
+      "description": "Ashoka Pillar emblem printed on the right front side of the note.",
+      "genuine_indicator": "Ashoka Pillar emblem is sharp, distinct, and correctly aligned."
+    },
+    {
+      "id": "see_through_register",
+      "name": "See-Through Register",
+      "description": "Denominational numeral '50' prints front and back and aligns perfectly when held to light.",
+      "genuine_indicator": "Perfect registration of the numeral '50' when held to light."
+    },
+    {
+      "id": "serial_number",
+      "name": "Serial Number",
+      "description": "Serial numbers in two panels with ascending font size.",
+      "genuine_indicator": "Numerals increase in size left to right; fluorescent under UV."
+    },
+    {
+      "id": "motif",
+      "name": "Motif — Hampi with Chariot",
+      "description": "Features Hampi with Chariot motif on the reverse side.",
+      "genuine_indicator": "Stone Chariot at Hampi motif is sharp and clearly defined."
+    }
+  ],
+  "₹100": [
+    {
+      "id": "sec_thread",
+      "name": "Windowed Security Thread",
+      "description": "A windowed security thread embedded in the paper shifts colour from green to blue when tilted. The thread contains the text 'Bharat' (in Devanagari) and 'RBI'. On the reverse, the thread appears as a continuous dark stripe.",
+      "genuine_indicator": "Thread visibly colour-shifts from green to blue under tilt; text 'Bharat/RBI' readable under magnification."
+    },
+    {
+      "id": "watermark",
+      "name": "Mahatma Gandhi Watermark",
+      "description": "A portrait watermark of Mahatma Gandhi is visible when held up to light. An electrotype numeral '100' watermark also appears alongside the portrait.",
+      "genuine_indicator": "Gandhi portrait and numeral '100' are both clearly visible when the note is held up to a light source."
     },
     {
       "id": "latent_image",
       "name": "Latent Image",
-      "description": "Latent image with denominational numeral 100."
+      "description": "A latent image of '100' is visible in the lower right area of the obverse (front) side when the note is held horizontally at eye level with light falling on it.",
+      "genuine_indicator": "The numeral '100' appears clearly in the latent image area when tilted at eye level."
     },
     {
       "id": "micro_letters",
       "name": "Micro-lettering",
-      "description": "'RBI', 'Bharat', 'India' and '100'."
+      "description": "Micro-letters 'RBI', 'Bharat', 'India' and '100' are printed between the two portraits on the front. Visible only under magnification.",
+      "genuine_indicator": "Micro-text 'RBI', 'Bharat', 'India', '100' is crisp and legible under a magnifying glass."
+    },
+    {
+      "id": "intaglio_printing",
+      "name": "Intaglio (Raised) Printing",
+      "description": "The portrait of Mahatma Gandhi, the Reserve Bank of India seal, the guarantee clause, the Governor's signature, and the Ashoka Pillar emblem are all printed in intaglio (raised) ink that can be felt by touch.",
+      "genuine_indicator": "Raised texture is distinctly felt when fingers are run over the portrait, RBI seal, and signature."
+    },
+    {
+      "id": "see_through_register",
+      "name": "See-Through Register",
+      "description": "On the front, a floral design is printed on the left; on the reverse is its complementary part. When held up to light, both parts combine perfectly to form a complete floral pattern.",
+      "genuine_indicator": "Floral design aligns perfectly on both sides when held to light — no offset or misalignment."
+    },
+    {
+      "id": "serial_number",
+      "name": "Serial Number",
+      "description": "The serial number is printed in two panels: one on the top left and one on the right. The numerals are in ascending font size, printed in fluorescent ink that glows under UV light. The prefix is alphanumeric.",
+      "genuine_indicator": "Serial number numerals increase in size from left to right; glows under UV; ink is sharp and evenly spaced."
+    },
+    {
+      "id": "ashoka_pillar",
+      "name": "Ashoka Pillar Emblem",
+      "description": "The Ashoka Pillar emblem is printed on the right side of the note in intaglio. The emblem is sharp, proportionate, and clearly detailed.",
+      "genuine_indicator": "Ashoka Pillar is crisp with fine detail; raised to the touch in intaglio."
+    },
+    {
+      "id": "rbi_promise",
+      "name": "RBI Promise Clause & Governor Signature",
+      "description": "The text 'I promise to pay the bearer the sum of One Hundred Rupees' is printed in Hindi and English. Below it is the Governor of RBI's signature. The year of printing is also present.",
+      "genuine_indicator": "Promise clause and Governor signature text are sharp, non-smudged, and correctly positioned."
+    },
+    {
+      "id": "motif",
+      "name": "Motif — Rani Ki Vav",
+      "description": "The reverse side features the iconic stepwell 'Rani Ki Vav' (Gujarat). The image should be detailed, clear, and symmetrical.",
+      "genuine_indicator": "Rani Ki Vav motif is sharp, well-defined, and centered on the reverse side."
+    },
+    {
+      "id": "fluorescent_ink",
+      "name": "Optical Features (UV/Fluorescent)",
+      "description": "Certain elements of the note, including the security thread, serial number, and the RBI seal, fluoresce under ultraviolet (UV) light.",
+      "genuine_indicator": "Under UV, the security thread glows and serial numbers fluoresce distinctly."
     }
   ],
   "₹200": [
     {
       "id": "sec_thread",
       "name": "Windowed Security Thread",
-      "description": "Colour shift from green to blue when tilted. Contains 'Bharat' and 'RBI'."
+      "description": "Windowed security thread with colour shift from green to blue. The thread reads 'Bharat' (in Devanagari) and 'RBI'. Shifts colour when tilted.",
+      "genuine_indicator": "Clear colour shift green-to-blue visible; embedded text 'Bharat/RBI' confirmed."
     },
     {
       "id": "watermark",
       "name": "Mahatma Gandhi Watermark",
-      "description": "Electrotype (200) watermark alongside Gandhi portrait."
+      "description": "Portrait watermark of Mahatma Gandhi and an electrotype '200' watermark visible when held to light.",
+      "genuine_indicator": "Gandhi portrait and '200' numeral both visible when held up to a light source."
     },
     {
       "id": "color_shift",
-      "name": "Colour Shifting Ink",
-      "description": "Denominational numeral 200 changes from green to blue."
+      "name": "Colour Shifting Ink (OVI)",
+      "description": "The numeral '200' printed in the lower right of the front changes colour from green to blue when the note is tilted. This is Optically Variable Ink (OVI).",
+      "genuine_indicator": "Numeral '200' clearly shifts from green to blue under tilt — not present on counterfeits."
     },
     {
       "id": "h_symbol",
-      "name": "H-Symbol for Visually Impaired",
-      "description": "Raised printing of Mahatma Gandhi portrait, Ashoka Pillar emblem, raised Identification mark H with micro-text ₹200, four angular bleed lines with two circles in between the lines."
+      "name": "Identification Mark (H-Symbol) for Visually Impaired",
+      "description": "An 'H'-shaped identification mark is printed in raised (intaglio) ink for visually impaired persons. There are also micro-text '₹200' within the mark, and four angular bleed lines with two circles between them on both left and right edges.",
+      "genuine_indicator": "H-symbol is raised and tactile; angular bleed lines and circles correctly positioned on both edges."
+    },
+    {
+      "id": "intaglio_printing",
+      "name": "Intaglio (Raised) Printing",
+      "description": "Gandhi portrait, RBI seal, guarantee clause, Governor's signature, and Ashoka Pillar are in intaglio.",
+      "genuine_indicator": "Raised tactile texture felt clearly on portrait, seal, and signature regions."
+    },
+    {
+      "id": "latent_image",
+      "name": "Latent Image",
+      "description": "A latent image of '200' is visible on the front when the note is held horizontally at eye level with light falling on it.",
+      "genuine_indicator": "Numeral '200' appears in latent image region when tilted at eye level."
+    },
+    {
+      "id": "micro_letters",
+      "name": "Micro-lettering",
+      "description": "Micro-letters 'RBI', 'Bharat', 'India', and '200' printed between portraits; readable only under magnification.",
+      "genuine_indicator": "Micro-text crisp and legible under magnification."
+    },
+    {
+      "id": "see_through_register",
+      "name": "See-Through Register",
+      "description": "Floral design on front aligns with complementary half on reverse when held to light.",
+      "genuine_indicator": "Floral pattern forms a complete, unbroken design when note is held to a light source."
+    },
+    {
+      "id": "serial_number",
+      "name": "Serial Number",
+      "description": "Alphanumeric serial number in ascending font size; fluoresces under UV light.",
+      "genuine_indicator": "Numerals increase in size left to right; glows under UV."
+    },
+    {
+      "id": "motif",
+      "name": "Motif — Sanchi Stupa",
+      "description": "The reverse features the Sanchi Stupa (Madhya Pradesh). The image should be detailed, centered, and symmetrical.",
+      "genuine_indicator": "Sanchi Stupa motif is sharp and well-defined on the reverse."
+    },
+    {
+      "id": "ashoka_pillar",
+      "name": "Ashoka Pillar Emblem",
+      "description": "Ashoka Pillar printed in intaglio on the right of the front side.",
+      "genuine_indicator": "Ashoka Pillar is detailed, crisp, and raised."
     }
   ],
   "₹500": [
     {
       "id": "sec_thread",
       "name": "Windowed Security Thread",
-      "description": "Colour shift from green to blue when tilted. Contains 'Bharat' and 'RBI'."
+      "description": "Windowed security thread with 'Bharat' and 'RBI' text. Shifts colour from green to blue under tilt.",
+      "genuine_indicator": "Colour shift from green to blue confirmed; embedded 'Bharat/RBI' text visible under magnification."
     },
     {
       "id": "watermark",
       "name": "Mahatma Gandhi Watermark",
-      "description": "Electrotype (500) watermark alongside Gandhi portrait."
+      "description": "Gandhi portrait watermark and electrotype numeral '500' visible under transmitted light.",
+      "genuine_indicator": "Gandhi portrait and '500' electrotype both visible when held up to light."
     },
     {
       "id": "color_shift",
-      "name": "Colour Shifting Ink",
-      "description": "Denominational numeral 500 in lower right changes from green to blue."
+      "name": "Colour Shifting Ink (OVI)",
+      "description": "The numeral '500' in the lower right changes from green to blue when tilted (OVI). This is a primary anti-counterfeit measure.",
+      "genuine_indicator": "Numeral '500' shifts colour from green to blue — strongest single visual indicator of authenticity."
     },
     {
       "id": "circle_symbol",
-      "name": "Circle Symbol for Visually Impaired",
-      "description": "Raised printing of Mahatma Gandhi portrait, Ashoka Pillar emblem, circular identification mark with microtext ₹500 on the right, five angular bleed lines on both the left and right sides."
+      "name": "Identification Mark (Circle) for Visually Impaired",
+      "description": "A circular identification mark for visually impaired with micro-text '₹500'. Five angular bleed lines on both left and right sides.",
+      "genuine_indicator": "Circle mark is raised, tactile, and micro-text '₹500' is present; five bleed lines on each side."
+    },
+    {
+      "id": "intaglio_printing",
+      "name": "Intaglio (Raised) Printing",
+      "description": "Gandhi portrait, RBI seal, guarantee and promise clause, Governor's signature, Ashoka Pillar, and RBI panel printed in raised intaglio ink.",
+      "genuine_indicator": "Distinct raised tactile feel on portrait, seal, and all intaglio regions."
+    },
+    {
+      "id": "latent_image",
+      "name": "Latent Image",
+      "description": "Latent image of '500' visible when note is held horizontally at eye level with light source.",
+      "genuine_indicator": "Numeral '500' visible in latent image field at correct angle."
+    },
+    {
+      "id": "micro_letters",
+      "name": "Micro-lettering",
+      "description": "Micro-text 'RBI', 'Bharat', 'India', '500' printed between portraits; magnification required.",
+      "genuine_indicator": "Micro-text is sharp, consistent, and fully legible under magnification."
+    },
+    {
+      "id": "see_through_register",
+      "name": "See-Through Register",
+      "description": "Floral design front and back align perfectly when held to light.",
+      "genuine_indicator": "Complete floral pattern with no gaps or offsets when held to light."
+    },
+    {
+      "id": "serial_number",
+      "name": "Serial Number",
+      "description": "Alphanumeric serial number with ascending font size; UV-fluorescent ink.",
+      "genuine_indicator": "Font size increases consistently left to right; glows under UV."
+    },
+    {
+      "id": "motif",
+      "name": "Motif — Red Fort",
+      "description": "The reverse of the ₹500 note features the iconic Red Fort (Lal Qila), New Delhi. The image must be crisp, detailed, and well-centered.",
+      "genuine_indicator": "Red Fort motif is sharp, well-detailed, and correctly centered on the reverse."
+    },
+    {
+      "id": "ashoka_pillar",
+      "name": "Ashoka Pillar Emblem",
+      "description": "Ashoka Pillar emblem on the right front side, printed in intaglio.",
+      "genuine_indicator": "Ashoka Pillar is raised, clear, and proportionate."
+    },
+    {
+      "id": "number_panel",
+      "name": "Denominational Numeral Panel",
+      "description": "The front prominently shows '500' in Devanagari and English. The reverse bottom shows '500' in multiple Indian languages. Must be clear, correctly typed, and properly spaced.",
+      "genuine_indicator": "Numeral panel text is uniform, correctly spaced, and not smudged or misaligned."
+    },
+    {
+      "id": "fluorescent_ink",
+      "name": "Optical Features (UV/Fluorescent)",
+      "description": "Security thread, serial number, and certain design elements fluoresce under UV light.",
+      "genuine_indicator": "UV causes security thread and serial numbers to fluoresce clearly."
     }
   ],
   "₹2000": [
     {
       "id": "sec_thread",
       "name": "Windowed Security Thread",
-      "description": "Colour shift from green to blue when tilted. Contains 'Bharat' and 'RBI' and '2000'."
+      "description": "Windowed security thread inscribed with 'Bharat', 'RBI', and '2000'. Shifts from green to blue when tilted. The thread is broader than lower denomination threads.",
+      "genuine_indicator": "Colour shift confirmed; '2000' text visible in thread under magnification — broader thread than ₹500."
     },
     {
       "id": "watermark",
       "name": "Mahatma Gandhi Watermark",
-      "description": "Electrotype (2000) watermark alongside Gandhi portrait."
+      "description": "Gandhi portrait watermark and electrotype '2000' visible under transmitted light.",
+      "genuine_indicator": "Both Gandhi portrait and '2000' electrotype clearly visible when held to light."
     },
     {
       "id": "color_shift",
-      "name": "Colour Shifting Ink",
-      "description": "Denominational numeral 2000 in lower right changes from green to blue."
+      "name": "Colour Shifting Ink (OVI)",
+      "description": "The numeral '2000' in the lower right changes from magenta to green when tilted. (Note: ₹2000 uses magenta-to-green, not green-to-blue.)",
+      "genuine_indicator": "Numeral '2000' shifts from magenta to green — unique to this denomination; counterfeits typically fail this test."
     },
     {
       "id": "rectangle_symbol",
-      "name": "Rectangle Symbol for Visually Impaired",
-      "description": "Raised printing of Mahatma Gandhi portrait, Ashoka Pillar emblem, horizontal rectangle with ₹2000, seven angular bleed lines on left and right sides."
+      "name": "Identification Mark (Rectangle) for Visually Impaired",
+      "description": "A horizontal rectangle identification mark with micro-text '₹2000'. Seven angular bleed lines on both left and right edges.",
+      "genuine_indicator": "Rectangle mark is raised, tactile; seven bleed lines present on each side."
+    },
+    {
+      "id": "intaglio_printing",
+      "name": "Intaglio (Raised) Printing",
+      "description": "Gandhi portrait, RBI seal, guarantee clause, Governor's signature, Ashoka Pillar all in intaglio.",
+      "genuine_indicator": "Clear raised texture on all intaglio regions; portrait especially pronounced."
+    },
+    {
+      "id": "latent_image",
+      "name": "Latent Image",
+      "description": "Latent image of '2000' visible when note is held horizontally at eye level.",
+      "genuine_indicator": "Numeral '2000' distinctly visible in latent image zone."
+    },
+    {
+      "id": "micro_letters",
+      "name": "Micro-lettering",
+      "description": "Micro-text 'RBI', 'Bharat', 'India', '2000' between portraits; magnification required.",
+      "genuine_indicator": "Micro-text is sharp, consistent, fully legible under magnification."
+    },
+    {
+      "id": "see_through_register",
+      "name": "See-Through Register",
+      "description": "Floral design front and back align perfectly when held to light.",
+      "genuine_indicator": "Perfect alignment of floral design when held to light."
+    },
+    {
+      "id": "serial_number",
+      "name": "Serial Number",
+      "description": "Alphanumeric serial number in ascending font size; UV-fluorescent.",
+      "genuine_indicator": "Font size increases from left to right; glows under UV."
+    },
+    {
+      "id": "motif",
+      "name": "Motif — ISRO Mangalyaan",
+      "description": "The reverse of the ₹2000 note features the Mangalyaan (Mars Orbiter Mission spacecraft) by ISRO — a unique and distinctive motif. The design should be crisp, centered, and correctly detailed.",
+      "genuine_indicator": "Mangalyaan spacecraft motif is sharp, correctly proportioned, and clearly centered on the reverse."
+    },
+    {
+      "id": "ashoka_pillar",
+      "name": "Ashoka Pillar Emblem",
+      "description": "Ashoka Pillar emblem in intaglio on the right of the front.",
+      "genuine_indicator": "Ashoka Pillar raised, clear, and detailed."
+    },
+    {
+      "id": "number_panel",
+      "name": "Denominational Numeral Panel",
+      "description": "Front shows '2000' in Devanagari and English. Reverse shows '2000' in multiple Indian scripts. Must be clear and correctly formatted.",
+      "genuine_indicator": "Numeral panel is uniform, clearly printed, and correctly spaced in all languages."
+    },
+    {
+      "id": "fluorescent_ink",
+      "name": "Optical Features (UV/Fluorescent)",
+      "description": "Security thread, serial number, and design elements fluoresce under UV light.",
+      "genuine_indicator": "Clear UV fluorescence on security thread and serial numbers."
     }
   ]
 }

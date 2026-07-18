@@ -100,7 +100,7 @@ export default function CurrencyPage() {
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-[minmax(340px,1.05fr)_minmax(380px,1.1fr)_minmax(340px,1fr)] lg:gap-6 lg:items-start">
             
             {/* Left Zone: Input */}
-            <div>
+            <div className="print:hidden">
               <CurrencyInputPanel 
                 input={input}
                 onInputChange={handleInputChange}
