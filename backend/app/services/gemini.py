@@ -60,10 +60,12 @@ class GeminiFraudService:
 
     def __init__(self) -> None:
         self.settings = get_settings()
-        # The new SDK automatically picks up GEMINI_API_KEY from environment,
-        # but we can explicitly pass it if needed.
         api_key = self.settings.gemini_api_key or None
-        self.client = genai.Client(api_key=api_key) if api_key else genai.Client()
+        if api_key:
+            self.client = genai.Client(api_key=api_key)
+        else:
+            logger.warning("GEMINI_API_KEY not configured. Gemini service will run in fallback mode.")
+            self.client = None
         self.model_name = getattr(self.settings, "gemini_model", "gemini-3.5-flash")
         
         # Force JSON response type
