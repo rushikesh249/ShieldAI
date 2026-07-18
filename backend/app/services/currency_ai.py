@@ -116,9 +116,53 @@ class CurrencyAIService:
             "{expected_features_json}", json.dumps(expected_features, indent=2)
         )
         
-        import google.generativeai as genai
-        uploaded_file = genai.upload_file(str(image_path), mime_type=mime_type)
-        return self.gemini._call_gemini(self.gemini.model, [prompt_text, uploaded_file])
+        from pydantic import BaseModel
+        from typing import List
+        class GeminiCurrencyFeature(BaseModel):
+            id: str
+            name: str
+            status: str
+            observation: str
+            confidence: int
+            
+        class GeminiCurrencyResponse(BaseModel):
+            features: List[GeminiCurrencyFeature]
+            evidence: List[str]
+            
+        try:
+            # Upload using the new SDK initialized in gemini.py
+            uploaded_file = self.gemini.client.files.upload(file=str(image_path), config={'mime_type': mime_type})
+            
+            from google.genai import types
+            config = types.GenerateContentConfig(
+                response_mime_type="application/json",
+                response_schema=GeminiCurrencyResponse,
+                temperature=0.0,
+                system_instruction="You are a forensic currency authentication expert. Inspect the security features."
+            )
+            
+            response = self.gemini.client.models.generate_content(
+                model=self.gemini.model_name,
+                contents=[uploaded_file, prompt_text],
+                config=config
+            )
+            
+            # The client handles json loading internally for structured outputs, but just in case it returns text:
+            try:
+                if isinstance(response.text, str):
+                    return json.loads(response.text)
+            except Exception:
+                pass
+            
+            # If it's a Pydantic model returned or parsed object
+            if hasattr(response, "parsed") and response.parsed:
+                return response.parsed.model_dump()
+                
+            # Fallback
+            return json.loads(response.text)
+        except Exception as e:
+            logger.error("Failed Gemini Vision analysis for currency: %s", str(e))
+            raise e
 
     def analyze(self, image_path: Path, mime_type: str, denomination: str) -> Dict[str, Any]:
         """Main pipeline for currency analysis."""
