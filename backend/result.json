@@ -1,0 +1,47 @@
+{
+  "level": "Critical",
+  "score": 95,
+  "confidence": 98,
+  "category": "Job Scam",
+  "assessment": "The communication is a classic Job Scam. It uses high-paying, low-effort promises ('Earn \u20b95000 daily working from home' by 'liking YouTube videos') to lure victims. Crucially, it demands an upfront 'refundable registration fee' of \u20b9999 to access tasks, which is a primary indicator of advance-fee fraud. Legitimate employers never charge fees to start working.",
+  "evidence": [
+    {
+      "label": "Upfront Registration Fee",
+      "severity": "Critical",
+      "explanation": "Demanding a payment of \u20b9999 under the guise of a 'refundable registration fee' before providing work is a major red flag for advance-fee fraud."
+    },
+    {
+      "label": "Unrealistic Financial Promise",
+      "severity": "High",
+      "explanation": "Promising \u20b95000 daily for simple tasks like liking YouTube videos is economically unviable and designed to exploit financial vulnerability."
+    },
+    {
+      "label": "Task-Based Scam Pattern",
+      "severity": "High",
+      "explanation": "The 'like YouTube videos' model is a widely documented scam format where victims are initially paid small amounts to build trust, then coerced into investing larger sums."
+    }
+  ],
+  "entities": [
+    {
+      "type": "Claimed Earnings",
+      "value": "\u20b95000 daily",
+      "copyable": true
+    },
+    {
+      "type": "Upfront Fee",
+      "value": "\u20b9999",
+      "copyable": true
+    },
+    {
+      "type": "Platform",
+      "value": "WhatsApp",
+      "copyable": true
+    }
+  ],
+  "recommendations": [
+    "Do not pay any upfront processing fees, taxes, or security deposits.",
+    "Stop communicating with the sender and block their number.",
+    "Do NOT share OTPs, PINs, or passwords with anyone.",
+    "Do NOT transfer any money or provide payment details."
+  ]
+}

@@ -42,6 +42,7 @@ Explainable AI Rules:
 - If marking as threat, you MUST explain WHY in the assessment.
 - Highlight specific linguistic patterns (e.g. "fear/urgency language used to bypass logic").
 - Highlight specific technical indicators (e.g. "unverified URL", "unknown number").
+- CRITICAL: Any mention of "Earn money daily", "working from home", "YouTube videos", or asking for a "registration fee" MUST be immediately classified as "Job Scam" or "Investment Fraud" with High/Critical severity. NEVER mark these as Safe.
 - CRITICAL: If the text contains physical threats, violence, extortion, or extreme harassment (e.g., "i will kill you"), it is NOT safe. You MUST categorize it as "Unknown / Requires Review" and assign a high `base_score` (e.g., 90-100) with "Critical" severity evidence. DO NOT mark such threats as "Safe Communication".
 
 Input Context:

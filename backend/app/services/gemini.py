@@ -13,6 +13,7 @@ from typing import Any, Dict
 
 from google import genai
 from google.genai import types
+from pydantic import BaseModel, Field
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from app.core.config import get_settings
@@ -36,6 +37,23 @@ def _load_prompt(filename: str) -> str:
 SYSTEM_PROMPT = _load_prompt("system_prompt_v1.txt")
 COMPLAINT_PROMPT = _load_prompt("complaint_prompt_v1.txt")
 
+
+class GeminiEvidence(BaseModel):
+    label: str
+    severity: str
+    explanation: str
+
+class GeminiEntity(BaseModel):
+    type: str
+    value: str
+
+class GeminiResponse(BaseModel):
+    category: str
+    base_score: int
+    confidence: int
+    assessment: str
+    evidence: list[GeminiEvidence]
+    extracted_entities: list[GeminiEntity]
 
 class GeminiFraudService:
     """Wrapper for Gemini interactions ensuring structured responses."""
@@ -62,6 +80,8 @@ class GeminiFraudService:
 
         config = types.GenerateContentConfig(
             response_mime_type="application/json",
+            response_schema=GeminiResponse,
+            temperature=0.0,
             system_instruction=system_instruction
         )
         
