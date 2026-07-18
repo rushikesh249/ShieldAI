@@ -10,6 +10,7 @@ import { ComplaintDraftModal } from "@/components/citizen/complaint-draft-modal"
 import { ThreatInput, AnalysisState, ThreatVerdict } from "@/lib/types/citizen"
 import { analyzeThreat } from "@/lib/services/analysis"
 import { Globe } from "lucide-react"
+import { SUPPORTED_LANGUAGES, TRANSLATIONS, LanguageCode } from "@/lib/i18n"
 
 export default function CitizenPage() {
   const [input, setInput] = useState<ThreatInput>({
@@ -21,7 +22,9 @@ export default function CitizenPage() {
   const [analysisState, setAnalysisState] = useState<AnalysisState>("idle")
   const [verdict, setVerdict] = useState<ThreatVerdict | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [language, setLanguage] = useState<"en" | "hi">("en")
+  const [language, setLanguage] = useState<LanguageCode>("en")
+
+  const t = TRANSLATIONS[language]
 
   const handleInputChange = (updates: Partial<ThreatInput>) => {
     setInput(prev => ({ ...prev, ...updates }))
@@ -58,26 +61,28 @@ export default function CitizenPage() {
         <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
           
           {/* Header & Language Toggle */}
-          <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-shield-cyan/10 pb-4 gap-4">
+          <div className="mb-6 flex flex-col sm:flex-row sm:items-start sm:justify-between border-b border-shield-cyan/10 pb-4 gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">AI Citizen Fraud Shield</h1>
-              <p className="text-sm text-shield-muted">Secure, explainable threat analysis for public safety.</p>
+              <h1 className="text-2xl font-bold text-white tracking-tight">{t.title}</h1>
+              <p className="text-sm text-shield-muted">{t.subtitle}</p>
             </div>
             
-            <div className="flex items-center gap-2 rounded-lg border border-shield-cyan/20 bg-shield-navy-light/50 p-1">
-              <Globe className="ml-2 h-4 w-4 text-shield-muted" />
-              <button 
-                onClick={() => setLanguage("en")}
-                className={`rounded px-3 py-1 text-xs font-medium transition-colors ${language === "en" ? "bg-shield-cyan/20 text-shield-cyan" : "text-shield-muted hover:text-white"}`}
-              >
-                English
-              </button>
-              <button 
-                onClick={() => setLanguage("hi")}
-                className={`rounded px-3 py-1 text-xs font-medium transition-colors ${language === "hi" ? "bg-shield-cyan/20 text-shield-cyan" : "text-shield-muted hover:text-white"}`}
-              >
-                हिंदी
-              </button>
+            {/* Language Switcher — all 6 Indian languages */}
+            <div className="flex flex-wrap items-center gap-1 rounded-lg border border-shield-cyan/20 bg-shield-navy-light/50 p-1 shrink-0">
+              <Globe className="ml-1 h-4 w-4 text-shield-muted shrink-0" />
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => setLanguage(lang.code)}
+                  className={`rounded px-3 py-1 text-xs font-medium transition-colors ${
+                    language === lang.code
+                      ? "bg-shield-cyan/20 text-shield-cyan"
+                      : "text-shield-muted hover:text-white"
+                  }`}
+                >
+                  {lang.name}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -90,6 +95,7 @@ export default function CitizenPage() {
                 onInputChange={handleInputChange}
                 onAnalyze={handleAnalyze}
                 isAnalyzing={analysisState !== "idle" && analysisState !== "complete" && analysisState !== "error"}
+                t={t}
               />
             </div>
 
@@ -98,6 +104,7 @@ export default function CitizenPage() {
               <AnalysisWorkspace 
                 state={analysisState}
                 verdict={verdict}
+                t={t}
               />
             </div>
 
@@ -106,6 +113,7 @@ export default function CitizenPage() {
               <IntelligenceWorkspace 
                 verdict={verdict}
                 onGenerateDraft={() => setIsModalOpen(true)}
+                t={t}
               />
             </div>
           </div>
@@ -120,6 +128,7 @@ export default function CitizenPage() {
         onClose={() => setIsModalOpen(false)}
         verdict={verdict}
         input={input}
+        t={t}
       />
     </div>
   )

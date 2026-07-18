@@ -22,6 +22,7 @@ interface Props {
   onInputChange: (updates: Partial<ThreatInput>) => void
   onAnalyze: () => void
   isAnalyzing: boolean
+  t: Record<string, string>
 }
 
 const SOURCES: { id: InputSource; icon: React.ElementType; label: string }[] = [
@@ -33,7 +34,7 @@ const SOURCES: { id: InputSource; icon: React.ElementType; label: string }[] = [
   { id: "Other", icon: MoreHorizontal, label: "Other" },
 ]
 
-export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyzing }: Props) {
+export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyzing, t }: Props) {
   const [showAdditional, setShowAdditional] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [recordingError, setRecordingError] = useState<string | null>(null)
@@ -73,7 +74,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
     }
 
     if (!("webkitSpeechRecognition" in window) && !("SpeechRecognition" in window)) {
-      setRecordingError("Speech recognition is not supported in your browser.")
+      setRecordingError(t.err_speech_support)
       return
     }
 
@@ -107,7 +108,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
       setIsRecording(true)
       setRecordingError(null)
     } catch (_err) {
-      setRecordingError("Microphone permission denied or unavailable.")
+      setRecordingError(t.err_speech_mic)
     }
   }
 
@@ -116,9 +117,9 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
   return (
     <div className="flex flex-col h-fit rounded-xl border border-shield-cyan/15 bg-shield-navy-light/50 p-5 shadow-xl shadow-shield-cyan/5 sm:p-6">
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-white">Analyze a Suspicious Communication</h2>
+        <h2 className="text-xl font-semibold text-white">{t.workspace_input_title}</h2>
         <p className="mt-2 text-sm text-shield-muted">
-          Submit a suspicious message, voice transcript, screenshot, or payment request for explainable AI-assisted risk analysis.
+          {t.workspace_input_subtitle}
         </p>
       </div>
 
@@ -126,7 +127,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
         {/* Source Selector */}
         <div>
           <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-shield-muted/70">
-            Source
+            {t.label_source}
           </label>
           <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
             {SOURCES.map((src) => (
@@ -150,21 +151,21 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
         <div>
           <div className="mb-2 flex items-center justify-between">
             <label className="text-xs font-semibold uppercase tracking-wider text-shield-muted/70">
-              Communication Text
+              {t.label_comm_text}
             </label>
             {input.text.length > 0 && (
               <button
                 onClick={() => onInputChange({ text: "" })}
                 className="text-[10px] text-shield-muted hover:text-white"
               >
-                Clear
+                {t.btn_clear}
               </button>
             )}
           </div>
           <textarea
             value={input.text}
             onChange={(e) => onInputChange({ text: e.target.value })}
-            placeholder="Paste a suspicious WhatsApp message, SMS, email, payment request, or digital-arrest warning here..."
+            placeholder={t.placeholder_comm_text}
             className="h-32 w-full resize-none rounded-lg border border-shield-cyan/10 bg-shield-navy/40 p-3 text-sm text-white placeholder-shield-muted/40 transition-colors focus:border-shield-cyan/40 focus:outline-none focus:ring-1 focus:ring-shield-cyan/40"
           />
           <div className="mt-1.5 text-right text-[10px] text-shield-muted/50">
@@ -185,7 +186,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
               }`}
             >
               <Mic className={`h-4 w-4 ${isRecording ? "animate-pulse" : ""}`} />
-              {isRecording ? "Listening..." : "Speak Message"}
+              {isRecording ? t.btn_listening : t.btn_speak}
             </button>
             {recordingError && <p className="mt-2 text-[10px] text-shield-critical">{recordingError}</p>}
           </div>
@@ -211,7 +212,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
             ) : (
               <div className="flex h-full flex-col items-center justify-center p-3 text-center">
                 <Upload className="mb-1 h-4 w-4 text-shield-muted/60" />
-                <span className="text-[10px] text-shield-muted">Drag screenshot or <button onClick={() => fileInputRef.current?.click()} className="text-shield-cyan hover:underline">browse</button></span>
+                <span className="text-[10px] text-shield-muted">{t.upload_screenshot.replace("browse", "")} <button onClick={() => fileInputRef.current?.click()} className="text-shield-cyan hover:underline">{t.upload_browse}</button></span>
                 <input ref={fileInputRef} type="file" accept="image/png, image/jpeg, image/webp" className="hidden" onChange={handleFileChange} />
               </div>
             )}
@@ -224,14 +225,14 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
             onClick={() => setShowAdditional(!showAdditional)}
             className="flex w-full items-center justify-between p-3 text-sm font-medium text-shield-muted hover:text-white"
           >
-            Additional Intelligence (Optional)
+            {t.additional_intel}
             {showAdditional ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
           </button>
           
           {showAdditional && (
             <div className="space-y-3 border-t border-shield-cyan/10 p-3 pt-3">
               <div>
-                <label className="mb-1 block text-[10px] uppercase text-shield-muted/70">Phone Number</label>
+                <label className="mb-1 block text-[10px] uppercase text-shield-muted/70">{t.label_phone}</label>
                 <input
                   type="text"
                   value={input.phoneNumber || ""}
@@ -241,7 +242,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
                 />
               </div>
               <div>
-                <label className="mb-1 block text-[10px] uppercase text-shield-muted/70">UPI ID</label>
+                <label className="mb-1 block text-[10px] uppercase text-shield-muted/70">{t.label_upi}</label>
                 <input
                   type="text"
                   value={input.upiId || ""}
@@ -251,7 +252,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
                 />
               </div>
               <div>
-                <label className="mb-1 block text-[10px] uppercase text-shield-muted/70">Suspicious URL</label>
+                <label className="mb-1 block text-[10px] uppercase text-shield-muted/70">{t.label_url}</label>
                 <input
                   type="text"
                   value={input.url || ""}
@@ -271,7 +272,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
           disabled={!isValidInput || isAnalyzing}
           className="w-full bg-shield-cyan py-6 text-base font-semibold text-shield-navy hover:bg-shield-cyan/90 disabled:opacity-50"
         >
-          {isAnalyzing ? "Analyzing Intelligence..." : "Analyze Threat"}
+          {isAnalyzing ? t.btn_analyzing : t.btn_analyze}
         </Button>
       </div>
     </div>

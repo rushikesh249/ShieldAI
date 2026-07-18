@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/button"
 interface Props {
   verdict: ThreatVerdict | null
   onGenerateDraft: () => void
+  t: Record<string, string>
 }
 
-export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
+export function IntelligenceWorkspace({ verdict, onGenerateDraft, t }: Props) {
   if (!verdict) {
     return (
       <div className="flex flex-col min-h-[400px] lg:min-h-[560px] h-fit rounded-xl border border-shield-cyan/15 bg-shield-navy-light/50 p-5 shadow-xl shadow-shield-cyan/5 sm:p-6">
@@ -17,9 +18,9 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
           <div className="mb-6 rounded-full bg-shield-cyan/5 p-4 ring-1 ring-shield-cyan/20">
             <Activity className="h-12 w-12 text-shield-cyan/50" />
           </div>
-          <h3 className="text-lg font-semibold text-white">Intelligence Awaiting Analysis</h3>
+          <h3 className="text-lg font-semibold text-white">{t.intel_awaiting_title}</h3>
           <p className="mt-2 max-w-[280px] text-sm text-shield-muted">
-            Threat score, explainable evidence, detected entities, and safety recommendations will appear here after analysis.
+            {t.intel_awaiting_subtitle}
           </p>
         </div>
       </div>
@@ -53,7 +54,7 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
       <div>
         <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-shield-muted">
           <ShieldAlert className="h-4 w-4 text-shield-cyan" />
-          Explainable Evidence
+          {t.section_evidence}
         </h3>
         <div className="space-y-2">
           {verdict.evidence.map((item, idx) => (
@@ -78,7 +79,7 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
         <div className="mt-4">
           <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-shield-muted">
             <Activity className="h-4 w-4 text-shield-cyan" />
-            Detected Entities
+            {t.section_entities}
           </h3>
           <div className="grid gap-2 sm:grid-cols-2">
             {verdict.entities.map((entity, idx) => (
@@ -106,7 +107,7 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
       <div className="mt-4">
         <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-shield-muted">
           <ShieldCheck className="h-4 w-4 text-shield-safe" />
-          Safety Recommendations
+          {t.section_recommendations}
         </h3>
         <ul className="space-y-2 rounded-lg border border-shield-safe/20 bg-shield-safe/5 p-4">
           {verdict.recommendations.map((rec, idx) => (
@@ -126,7 +127,7 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
           className="w-full border-shield-cyan/30 bg-shield-cyan/5 py-6 text-sm font-semibold text-white hover:bg-shield-cyan/10 hover:border-shield-cyan/50"
         >
           <FileText className="mr-2 h-4 w-4 text-shield-cyan" />
-          Generate Complaint Draft
+          {t.btn_generate_draft}
         </Button>
       </div>
 

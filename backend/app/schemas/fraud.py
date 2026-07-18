@@ -47,6 +47,10 @@ class ThreatInputSchema(BaseModel):
         description="Any URL included in the message.",
         examples=["http://fake-bank-update.com"]
     )
+    language: str = Field(
+        default="en",
+        description="Language code for the analysis response (e.g. 'en', 'hi', 'bn', 'ta', 'te', 'mr')."
+    )
 
     model_config = {"populate_by_name": True}
 
