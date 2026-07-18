@@ -192,8 +192,7 @@ class CurrencyAIService:
             gemini_evidence = gemini_res.get("evidence", [])
         except Exception as e:
             logger.error("Gemini currency analysis failed: %s", str(e))
-            gemini_features = []
-            gemini_evidence = ["AI Vision analysis failed."]
+            raise ValueError(f"AI Vision analysis failed: {str(e)}")
         gemini_time = (time.perf_counter() - gemini_start) * 1000
             
         # 4. Feature Fusion
