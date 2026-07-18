@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 from PIL import Image
+from tenacity import retry, stop_after_attempt, wait_exponential
 
 from app.core.config import get_settings
 from app.core.logging import get_logger
@@ -107,6 +108,7 @@ class CurrencyAIService:
             logger.error("TF Inference failed: %s", str(e))
             raise ValueError("TensorFlow Inference Failed")
 
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
     def _analyze_gemini(self, image_path: Path, mime_type: str, denomination: str) -> Dict[str, Any]:
         """Runs image through Gemini Vision for feature explainability."""
         expected_features = CURRENCY_FEATURES_DB.get(denomination, [])
@@ -192,7 +194,8 @@ class CurrencyAIService:
             gemini_evidence = gemini_res.get("evidence", [])
         except Exception as e:
             logger.error("Gemini currency analysis failed: %s", str(e))
-            raise ValueError(f"AI Vision analysis failed: {str(e)}")
+            gemini_features = []
+            gemini_evidence = ["AI Vision analysis unavailable due to errors. Fallback to base model used."]
         gemini_time = (time.perf_counter() - gemini_start) * 1000
             
         # 4. Feature Fusion
