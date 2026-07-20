@@ -89,6 +89,7 @@ export default function NetworkPage() {
             <div className="order-2 lg:order-1">
               <DatasetInputPanel 
                 hasDataset={csvContent.length > 0}
+                csvContent={csvContent}
                 onDatasetLoaded={handleDatasetLoaded}
                 onGenerateNetwork={handleGenerateNetwork}
                 isAnalyzing={analysisState !== "idle" && analysisState !== "complete" && analysisState !== "error"}

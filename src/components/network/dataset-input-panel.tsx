@@ -19,12 +19,13 @@ interface Props {
   onDatasetLoaded: (csvContent: string) => void
   onGenerateNetwork: () => void
   hasDataset: boolean
+  csvContent?: string
   isAnalyzing: boolean
 }
 
 type DatasetType = "Transaction Records" | "Call Records" | "Combined Intelligence"
 
-export function DatasetInputPanel({ onDatasetLoaded, onGenerateNetwork, hasDataset, isAnalyzing }: Props) {
+export function DatasetInputPanel({ onDatasetLoaded, onGenerateNetwork, hasDataset, csvContent, isAnalyzing }: Props) {
   const [datasetType, setDatasetType] = useState<DatasetType>("Transaction Records")
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -175,14 +176,14 @@ export function DatasetInputPanel({ onDatasetLoaded, onGenerateNetwork, hasDatas
           </div>
         ) : (
           <div className="rounded-xl border border-shield-cyan/20 bg-shield-navy/30 p-4">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-3">
-                <div className="rounded-full bg-green-500/10 p-2 text-green-400 ring-1 ring-green-500/20">
+            <div className="flex items-start justify-between min-w-0 gap-2">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="rounded-full bg-green-500/10 p-2 text-green-400 ring-1 ring-green-500/20 shrink-0">
                   <CheckCircle2 className="h-5 w-5" />
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-white">{fileName}</p>
-                  <p className="text-xs text-shield-muted">Dataset parsed successfully</p>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-white truncate" title={fileName || "Dataset"}>{fileName}</p>
+                  <p className="text-xs text-shield-muted truncate">Dataset parsed successfully</p>
                 </div>
               </div>
               <button 
@@ -190,31 +191,67 @@ export function DatasetInputPanel({ onDatasetLoaded, onGenerateNetwork, hasDatas
                   setFileName(null)
                   onDatasetLoaded("")
                 }}
-                className="text-xs font-medium text-shield-cyan hover:text-shield-cyan/80"
+                className="text-xs font-medium text-shield-cyan hover:text-shield-cyan/80 shrink-0 ml-1 whitespace-nowrap"
               >
                 Change File
               </button>
             </div>
             
             {/* Section 4: Dataset Summary */}
-            <div className="mt-4 grid grid-cols-2 gap-3 border-t border-shield-cyan/10 pt-4">
-              <div>
-                <p className="text-[10px] uppercase tracking-wider text-shield-muted">Total Records</p>
-                <p className="text-sm font-medium text-white">1,420</p>
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-wider text-shield-muted">Unique Entities</p>
-                <p className="text-sm font-medium text-white">45</p>
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-wider text-shield-muted">Date Range</p>
-                <p className="text-sm font-medium text-white">May 12 - May 16</p>
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-wider text-shield-muted">Missing Values</p>
-                <p className="text-sm font-medium text-green-400">0%</p>
-              </div>
-            </div>
+            {(() => {
+              const lines = (csvContent || "").split('\\n').filter(l => l.trim().length > 0)
+              const dataLines = lines.slice(1) // skip header
+              
+              const uniqueEntities = new Set<string>()
+              let minDate = ""
+              let maxDate = ""
+              
+              dataLines.forEach(line => {
+                const parts = line.split(',')
+                if (parts.length > 3) {
+                  const timestamp = parts[1]
+                  const src = parts[2]
+                  const dst = parts[3]
+                  if (src) uniqueEntities.add(src)
+                  if (dst) uniqueEntities.add(dst)
+                  
+                  if (!minDate || timestamp < minDate) minDate = timestamp
+                  if (!maxDate || timestamp > maxDate) maxDate = timestamp
+                }
+              })
+              
+              const formatDateRange = () => {
+                if (!minDate) return "N/A"
+                try {
+                  const d1 = new Date(minDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+                  const d2 = new Date(maxDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+                  return d1 === d2 ? d1 : `${d1} - ${d2}`
+                } catch {
+                  return "Invalid Dates"
+                }
+              }
+
+              return (
+                <div className="mt-4 grid grid-cols-2 gap-3 border-t border-shield-cyan/10 pt-4">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-shield-muted">Total Records</p>
+                    <p className="text-sm font-medium text-white">{dataLines.length.toLocaleString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-shield-muted">Unique Entities</p>
+                    <p className="text-sm font-medium text-white">{uniqueEntities.size.toLocaleString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-shield-muted">Date Range</p>
+                    <p className="text-sm font-medium text-white truncate" title={formatDateRange()}>{formatDateRange()}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-shield-muted">Missing Values</p>
+                    <p className="text-sm font-medium text-green-400">0%</p>
+                  </div>
+                </div>
+              )
+            })()}
           </div>
         )}
 
@@ -259,30 +296,30 @@ export function DatasetInputPanel({ onDatasetLoaded, onGenerateNetwork, hasDatas
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-shield-cyan/5">
-                  <tr className="hover:bg-shield-cyan/5">
-                    <td className="px-3 py-1.5 whitespace-nowrap">2024-05-12 09:15</td>
-                    <td className="px-3 py-1.5 font-mono">VICTIM-03</td>
-                    <td className="px-3 py-1.5 font-mono">ACC-2087</td>
-                    <td className="px-3 py-1.5">₹150,000</td>
-                  </tr>
-                  <tr className="hover:bg-shield-cyan/5">
-                    <td className="px-3 py-1.5 whitespace-nowrap">2024-05-12 09:18</td>
-                    <td className="px-3 py-1.5 font-mono">ACC-2087</td>
-                    <td className="px-3 py-1.5 font-mono">ACC-1048</td>
-                    <td className="px-3 py-1.5">₹148,000</td>
-                  </tr>
-                  <tr className="hover:bg-shield-cyan/5">
-                    <td className="px-3 py-1.5 whitespace-nowrap">2024-05-12 11:30</td>
-                    <td className="px-3 py-1.5 font-mono">VICTIM-08</td>
-                    <td className="px-3 py-1.5 font-mono">ACC-2087</td>
-                    <td className="px-3 py-1.5">₹300,000</td>
-                  </tr>
-                  <tr className="hover:bg-shield-cyan/5">
-                    <td className="px-3 py-1.5 whitespace-nowrap">2024-05-14 11:45</td>
-                    <td className="px-3 py-1.5 font-mono">VICTIM-12</td>
-                    <td className="px-3 py-1.5 font-mono">UPI-14</td>
-                    <td className="px-3 py-1.5">₹120,000</td>
-                  </tr>
+                  {(() => {
+                    const lines = (csvContent || "").split('\\n').filter(l => l.trim().length > 0)
+                    const previewLines = lines.slice(1, 5) // up to 4 rows
+                    
+                    if (previewLines.length === 0) {
+                      return (
+                        <tr><td colSpan={4} className="p-3 text-center">No data found</td></tr>
+                      )
+                    }
+                    
+                    return previewLines.map((line, idx) => {
+                      const parts = line.split(',')
+                      // transaction_id, timestamp, source_account, destination_account, amount
+                      if (parts.length < 5) return null
+                      return (
+                        <tr key={idx} className="hover:bg-shield-cyan/5">
+                          <td className="px-3 py-1.5 whitespace-nowrap">{parts[1]?.substring(0, 16)}</td>
+                          <td className="px-3 py-1.5 font-mono">{parts[2]}</td>
+                          <td className="px-3 py-1.5 font-mono">{parts[3]}</td>
+                          <td className="px-3 py-1.5">₹{parseFloat(parts[4] || "0").toLocaleString()}</td>
+                        </tr>
+                      )
+                    })
+                  })()}
                 </tbody>
               </table>
             </div>

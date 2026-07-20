@@ -163,7 +163,151 @@ export async function analyzeNetworkDataset(
   
   onStateChange("complete")
 
-  // Return the synthetic dataset. In reality, the CSV content would be parsed, 
-  // passed to a backend, and a real graph structure returned.
-  return SAMPLE_DATASET
+  // Return the synthetic dataset if it's the specific DEMO_DATASET string
+  if (csvContent === "DEMO_DATASET_LOADED") {
+    return SAMPLE_DATASET
+  }
+
+  // Otherwise, dynamically parse the uploaded CSV
+  const lines = csvContent.split('\\n').filter(l => l.trim().length > 0)
+  const dataLines = lines.slice(1) // Skip header
+  
+  // Maps to track entities and relationships
+  const entityMap = new Map<string, {
+    inDegree: number,
+    outDegree: number,
+    incomingVal: number,
+    outgoingVal: number,
+    count: number,
+    type?: string,
+    riskLevel?: string,
+    riskScore?: number
+  }>()
+  
+  const rels: FraudRelationship[] = []
+  
+  dataLines.forEach((line, idx) => {
+    const parts = line.split(',')
+    if (parts.length < 5) return
+    const ts = parts[1]
+    const src = parts[2]
+    const dst = parts[3]
+    const amount = parseFloat(parts[4] || "0")
+    
+    if (!entityMap.has(src)) entityMap.set(src, { inDegree: 0, outDegree: 0, incomingVal: 0, outgoingVal: 0, count: 0 })
+    if (!entityMap.has(dst)) entityMap.set(dst, { inDegree: 0, outDegree: 0, incomingVal: 0, outgoingVal: 0, count: 0 })
+      
+    const sData = entityMap.get(src)!
+    const dData = entityMap.get(dst)!
+    
+    sData.outDegree += 1
+    sData.outgoingVal += amount
+    sData.count += 1
+    
+    dData.inDegree += 1
+    dData.incomingVal += amount
+    dData.count += 1
+    
+    rels.push({
+      id: `rel-${idx}`,
+      sourceId: src,
+      targetId: dst,
+      type: "Transaction",
+      weight: Math.max(1, Math.min(amount / 5000, 5)), // dynamic weight
+      amount: `₹${amount.toLocaleString()}`
+    })
+  })
+  
+  // Categorize entities and calculate radial layout
+  const entities: FraudEntity[] = []
+  let totalAnalyzedValue = 0
+  
+  const coordinators: string[] = []
+  const mules: string[] = []
+  const victims: string[] = []
+  const normals: string[] = []
+  
+  for (const [id, data] of entityMap.entries()) {
+    totalAnalyzedValue += data.outgoingVal
+    
+    // Very simple heuristics for our demo
+    if (data.inDegree > 0 && data.outDegree === 0) {
+      data.type = "Suspected Coordinator"
+      data.riskLevel = "High"
+      data.riskScore = 95
+      coordinators.push(id)
+    } else if (data.inDegree > 0 && data.outDegree > 0 && data.inDegree >= data.outDegree) {
+      data.type = "Potential Money Mule"
+      data.riskLevel = "Medium"
+      data.riskScore = 65
+      mules.push(id)
+    } else if (data.outDegree > 0 && data.inDegree === 0 && data.outDegree > 1) {
+      data.type = "Victim"
+      data.riskLevel = "Low"
+      data.riskScore = 15
+      victims.push(id)
+    } else if (data.outDegree === 1 && data.inDegree === 0) {
+       data.type = "Victim"
+       data.riskLevel = "Low"
+       data.riskScore = 10
+       victims.push(id)
+    } else {
+      data.type = "Unknown Entity"
+      data.riskLevel = "Unknown"
+      data.riskScore = 20
+      normals.push(id)
+    }
+  }
+
+  // Layout function
+  const assignPositions = (group: string[], centerX: number, centerY: number, radius: number) => {
+    group.forEach((id, i) => {
+      const angle = (i / Math.max(1, group.length)) * Math.PI * 2
+      const x = centerX + Math.cos(angle) * radius
+      const y = centerY + Math.sin(angle) * radius
+      
+      const data = entityMap.get(id)!
+      entities.push({
+        id,
+        label: id,
+        type: data.type || "Unknown Entity",
+        riskLevel: (data.riskLevel as "High"|"Medium"|"Low"|"Unknown") || "Unknown",
+        riskScore: data.riskScore || 0,
+        x,
+        y,
+        incomingValue: `₹${data.incomingVal.toLocaleString()}`,
+        outgoingValue: `₹${data.outgoingVal.toLocaleString()}`,
+        transactionCount: data.count,
+        connectedEntitiesCount: data.inDegree + data.outDegree,
+        indicators: [] // simplistic for dynamic
+      })
+    })
+  }
+
+  // Place nodes on SVG canvas (800x600 coordinate space)
+  assignPositions(coordinators, 400, 300, 0)       // Center
+  assignPositions(mules, 400, 300, 140)            // Inner circle
+  assignPositions(victims, 400, 300, 280)          // Outer circle
+  assignPositions(normals, 650, 150, 100)          // Off to the side
+
+  const summary: InvestigationSummary = {
+    overview: "Dynamic analysis of uploaded dataset reveals possible organized structure.",
+    totalEntities: entities.length,
+    totalRelationships: rels.length,
+    clustersIdentified: 1,
+    highPriorityEntities: coordinators.length,
+    potentialMules: mules.length,
+    connectedVictims: victims.length,
+    totalAnalyzedValue: `₹${totalAnalyzedValue.toLocaleString()}`,
+    keyPatterns: ["Dynamically detected transaction flows from dataset."]
+  }
+
+  return {
+    entities,
+    relationships: rels,
+    clusters: [], // skipping clusters for dynamic parsing to keep it simple
+    timeline: [], // skipping timeline
+    summary,
+    recommendations: []
+  }
 }
