@@ -179,6 +179,7 @@ export async function analyzeNetworkDataset(
     incomingVal: number,
     outgoingVal: number,
     count: number,
+    uniqueSenders: Set<string>,
     type?: string,
     riskLevel?: string,
     riskScore?: number
@@ -187,15 +188,14 @@ export async function analyzeNetworkDataset(
   const rels: FraudRelationship[] = []
   
   dataLines.forEach((line, idx) => {
-    const parts = line.split(',')
+    const parts = line.split(',').map(p => p.trim())
     if (parts.length < 5) return
-    const ts = parts[1]
     const src = parts[2]
     const dst = parts[3]
     const amount = parseFloat(parts[4] || "0")
     
-    if (!entityMap.has(src)) entityMap.set(src, { inDegree: 0, outDegree: 0, incomingVal: 0, outgoingVal: 0, count: 0 })
-    if (!entityMap.has(dst)) entityMap.set(dst, { inDegree: 0, outDegree: 0, incomingVal: 0, outgoingVal: 0, count: 0 })
+    if (!entityMap.has(src)) entityMap.set(src, { inDegree: 0, outDegree: 0, incomingVal: 0, outgoingVal: 0, count: 0, uniqueSenders: new Set() })
+    if (!entityMap.has(dst)) entityMap.set(dst, { inDegree: 0, outDegree: 0, incomingVal: 0, outgoingVal: 0, count: 0, uniqueSenders: new Set() })
       
     const sData = entityMap.get(src)!
     const dData = entityMap.get(dst)!
@@ -207,6 +207,7 @@ export async function analyzeNetworkDataset(
     dData.inDegree += 1
     dData.incomingVal += amount
     dData.count += 1
+    dData.uniqueSenders.add(src)
     
     rels.push({
       id: `rel-${idx}`,
@@ -230,27 +231,31 @@ export async function analyzeNetworkDataset(
   for (const [id, data] of entityMap.entries()) {
     totalAnalyzedValue += data.outgoingVal
     
-    // Very simple heuristics for our demo
-    if (data.inDegree > 0 && data.outDegree === 0) {
+    // Smarter heuristics:
+    // Coordinator: only receives, from MULTIPLE unique senders (hub pattern)
+    if (data.inDegree > 0 && data.outDegree === 0 && data.uniqueSenders.size >= 2) {
       data.type = "Suspected Coordinator"
       data.riskLevel = "High"
-      data.riskScore = 95
+      data.riskScore = Math.min(99, 70 + data.uniqueSenders.size * 5)
       coordinators.push(id)
+    // Mule: both receives and sends (pass-through)
     } else if (data.inDegree > 0 && data.outDegree > 0 && data.inDegree >= data.outDegree) {
       data.type = "Potential Money Mule"
       data.riskLevel = "Medium"
-      data.riskScore = 65
+      data.riskScore = Math.min(85, 50 + data.inDegree * 3)
       mules.push(id)
-    } else if (data.outDegree > 0 && data.inDegree === 0 && data.outDegree > 1) {
+    // Victim: only sends money, never receives
+    } else if (data.outDegree > 0 && data.inDegree === 0) {
       data.type = "Victim"
       data.riskLevel = "Low"
-      data.riskScore = 15
+      data.riskScore = Math.min(25, 5 + data.outDegree * 3)
       victims.push(id)
-    } else if (data.outDegree === 1 && data.inDegree === 0) {
-       data.type = "Victim"
-       data.riskLevel = "Low"
-       data.riskScore = 10
-       victims.push(id)
+    // Normal recipient: receives from only 1 source, never sends
+    } else if (data.inDegree > 0 && data.outDegree === 0 && data.uniqueSenders.size === 1) {
+      data.type = "Unknown Entity"
+      data.riskLevel = "Unknown"
+      data.riskScore = 15
+      normals.push(id)
     } else {
       data.type = "Unknown Entity"
       data.riskLevel = "Unknown"
