@@ -47,7 +47,12 @@ class FeatureFusionLayer:
                 
         for feat in gemini_features:
             status = feat.get("status", "Unknown")
-            if status == "Inconsistency":
+            feat_id = feat.get("id", "")
+            
+            if (feat_id == "image_validity" or feat_id == "global_check") and status == "Inconsistency":
+                inconsistencies += 3
+                combined_evidence.append(_MockEv("Critical"))
+            elif status == "Inconsistency":
                 inconsistencies += 1
                 combined_evidence.append(_MockEv("High"))
             elif status == "Review":

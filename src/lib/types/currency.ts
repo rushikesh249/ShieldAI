@@ -12,12 +12,20 @@ export interface CurrencyInput {
 
 export type FeatureStatus = "Consistent" | "Review" | "Inconsistency" | "Unknown"
 
+export interface BoundingBox {
+  x: number
+  y: number
+  width: number
+  height: number
+}
+
 export interface SecurityFeature {
   id: string
   name: string
   status: FeatureStatus
   observation: string
   confidence?: number // 0-100
+  boundingBox?: BoundingBox
 }
 
 export type CurrencyRiskLevel = "Low Risk" | "Review Recommended" | "High Risk"

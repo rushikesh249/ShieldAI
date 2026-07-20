@@ -60,63 +60,67 @@ export function CurrencyPreviewPanel({ state, result, imageUrl, onRemoveImage }:
           <div className="relative flex flex-col items-center w-full max-w-full mx-auto">
             
             {/* Image Container */}
-            <div className="relative w-full overflow-hidden rounded-lg border border-shield-cyan/20 bg-black/40" style={{ minHeight: "300px" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={imageUrl} 
-                alt="Currency Preview" 
-                className="w-full object-contain max-h-[500px]"
-              />
+            <div className="relative w-full overflow-hidden rounded-lg border border-shield-cyan/20 bg-black/40 flex flex-col justify-center" style={{ minHeight: "200px" }}>
+              <div className="relative w-full max-w-fit mx-auto">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src={imageUrl} 
+                  alt="Currency Preview" 
+                  className="w-full h-auto max-h-[500px] object-contain block"
+                />
 
-              {/* Scanning Animation */}
-              {isAnalyzing && (
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                  <div className="absolute left-0 top-0 h-[2px] w-full bg-shield-cyan shadow-[0_0_15px_3px_rgba(0,212,255,0.7)] animate-[scan_2s_ease-in-out_infinite_alternate]" />
-                  <div className="absolute inset-0 bg-shield-cyan/5 animate-pulse" />
-                </div>
-              )}
+                {/* Scanning Animation */}
+                {isAnalyzing && (
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-lg">
+                    <div className="absolute left-0 top-0 h-[2px] w-full bg-shield-cyan shadow-[0_0_15px_3px_rgba(0,212,255,0.7)] animate-[scan_2s_ease-in-out_infinite_alternate]" />
+                    <div className="absolute inset-0 bg-shield-cyan/5 animate-pulse" />
+                  </div>
+                )}
 
-              {/* Overlays */}
-              {isComplete && result && (
-                <div className="absolute inset-0 pointer-events-none">
-                  {/* Fake fixed overlays mapped over the image to simulate detections */}
-                  {result.features.map((feature, idx) => {
-                    const top = 20 + (idx * 25);
-                    const left = 10 + (idx * 30);
-                    
-                    let borderColor = "border-green-400";
-                    let bgColor = "bg-green-400/20";
-                    let textColor = "text-green-400";
-                    
-                    if (feature.status === "Review") {
-                      borderColor = "border-amber-400";
-                      bgColor = "bg-amber-400/20";
-                      textColor = "text-amber-400";
-                    } else if (feature.status === "Inconsistency") {
-                      borderColor = "border-red-400";
-                      bgColor = "bg-red-400/20";
-                      textColor = "text-red-400";
-                    }
+                {/* Overlays */}
+                {isComplete && result && (
+                  <div className="absolute inset-0 pointer-events-none">
+                    {result.features.map((feature, idx) => {
+                      // Use boundingBox if provided, otherwise fallback to diagonal layout
+                      const top = feature.boundingBox ? feature.boundingBox.y * 100 : 20 + (idx * 25);
+                      const left = feature.boundingBox ? feature.boundingBox.x * 100 : 10 + (idx * 30);
+                      const width = feature.boundingBox ? feature.boundingBox.width * 100 : 25;
+                      const height = feature.boundingBox ? feature.boundingBox.height * 100 : 15;
+                      
+                      let borderColor = "border-green-400";
+                      let bgColor = "bg-green-400/20";
+                      let textColor = "text-green-400";
+                      
+                      if (feature.status === "Review") {
+                        borderColor = "border-amber-400";
+                        bgColor = "bg-amber-400/20";
+                        textColor = "text-amber-400";
+                      } else if (feature.status === "Inconsistency") {
+                        borderColor = "border-red-400";
+                        bgColor = "bg-red-400/20";
+                        textColor = "text-red-400";
+                      }
 
-                    return (
-                      <div 
-                        key={feature.id}
-                        className={`absolute border-2 ${borderColor} ${bgColor} rounded-sm flex items-center justify-center backdrop-blur-[1px]`}
-                        style={{
-                          top: `${top}%`,
-                          left: `${left}%`,
-                          width: '120px',
-                          height: '60px',
-                        }}
-                      >
-                        <span className={`absolute -top-6 left-0 whitespace-nowrap rounded bg-shield-navy/90 px-2 py-0.5 text-[10px] font-bold ${textColor} ring-1 ring-inset ring-current`}>
-                          {feature.name}
-                        </span>
-                      </div>
-                    )
-                  })}
-                </div>
-              )}
+                      return (
+                        <div 
+                          key={feature.id}
+                          className={`absolute border-2 ${borderColor} ${bgColor} rounded-sm flex items-center justify-center backdrop-blur-[1px] transition-all duration-500`}
+                          style={{
+                            top: `${top}%`,
+                            left: `${left}%`,
+                            width: feature.boundingBox ? `${width}%` : '120px',
+                            height: feature.boundingBox ? `${height}%` : '60px',
+                          }}
+                        >
+                          <span className={`absolute -top-6 left-0 whitespace-nowrap rounded bg-shield-navy/90 px-2 py-0.5 text-[10px] font-bold ${textColor} ring-1 ring-inset ring-current`}>
+                            {feature.name}
+                          </span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Analysis Progress Steps */}

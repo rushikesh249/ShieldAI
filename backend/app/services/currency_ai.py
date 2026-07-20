@@ -119,13 +119,21 @@ class CurrencyAIService:
         )
         
         from pydantic import BaseModel
-        from typing import List
+        from typing import List, Optional
+        
+        class BoundingBox(BaseModel):
+            x: float
+            y: float
+            width: float
+            height: float
+
         class GeminiCurrencyFeature(BaseModel):
             id: str
             name: str
             status: str
             observation: str
             confidence: int
+            boundingBox: Optional[BoundingBox] = None
             
         class GeminiCurrencyResponse(BaseModel):
             features: List[GeminiCurrencyFeature]
@@ -192,10 +200,22 @@ class CurrencyAIService:
             gemini_res = self._analyze_gemini(image_path, mime_type, denomination)
             gemini_features = gemini_res.get("features", [])
             gemini_evidence = gemini_res.get("evidence", [])
+            
+            # Enforce default bounding boxes from knowledge base to fix visual inconsistencies
+            expected_features = CURRENCY_FEATURES_DB.get(denomination, [])
+            feature_db_map = {f["id"]: f for f in expected_features}
+            for f in gemini_features:
+                feature_id = f.get("id")
+                if feature_id in feature_db_map and "defaultBoundingBox" in feature_db_map[feature_id]:
+                    f["boundingBox"] = feature_db_map[feature_id]["defaultBoundingBox"]
         except Exception as e:
             logger.error("Gemini currency analysis failed: %s", str(e))
-            gemini_features = []
-            gemini_evidence = ["AI Vision analysis unavailable due to errors. Fallback to base model used."]
+            if "429" in str(e) or "quota" in str(e).lower() or "RESOURCE_EXHAUSTED" in str(e):
+                gemini_features = [{"id": "api_quota", "name": "Analysis Unavailable", "status": "Unknown", "observation": "AI verification is temporarily unavailable due to high traffic or quota limits. Please rely on manual verification.", "confidence": 0}]
+                gemini_evidence = ["AI Vision analysis temporarily unavailable (Rate Limit/Quota)."]
+            else:
+                gemini_features = [{"id": "global_check", "name": "Image Validity", "status": "Inconsistency", "observation": "AI analysis failed completely. The image may not be a valid currency note or could not be processed.", "confidence": 100}]
+                gemini_evidence = ["AI Vision analysis unavailable due to errors. The uploaded image could not be verified as a valid currency note."]
         gemini_time = (time.perf_counter() - gemini_start) * 1000
             
         # 4. Feature Fusion
