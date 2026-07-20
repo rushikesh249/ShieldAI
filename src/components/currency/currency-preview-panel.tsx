@@ -112,9 +112,14 @@ export function CurrencyPreviewPanel({ state, result, imageUrl, onRemoveImage }:
                             height: feature.boundingBox ? `${height}%` : '60px',
                           }}
                         >
-                          <span className={`absolute -top-6 left-0 whitespace-nowrap rounded bg-shield-navy/90 px-2 py-0.5 text-[10px] font-bold ${textColor} ring-1 ring-inset ring-current`}>
-                            {feature.name}
-                          </span>
+                          {(() => {
+                            const labelPosition = left > 70 ? 'right-0' : 'left-0';
+                            return (
+                              <span className={`absolute -top-6 ${labelPosition} whitespace-nowrap rounded bg-shield-navy/90 px-2 py-0.5 text-[10px] font-bold ${textColor} ring-1 ring-inset ring-current z-10`}>
+                                {feature.name}
+                              </span>
+                            )
+                          })()}
                         </div>
                       )
                     })}
