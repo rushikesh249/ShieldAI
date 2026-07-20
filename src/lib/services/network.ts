@@ -169,7 +169,7 @@ export async function analyzeNetworkDataset(
   }
 
   // Otherwise, dynamically parse the uploaded CSV
-  const lines = csvContent.split('\\n').filter(l => l.trim().length > 0)
+  const lines = csvContent.split(/\r?\n/).filter(l => l.trim().length > 0)
   const dataLines = lines.slice(1) // Skip header
   
   // Maps to track entities and relationships

@@ -199,7 +199,7 @@ export function DatasetInputPanel({ onDatasetLoaded, onGenerateNetwork, hasDatas
             
             {/* Section 4: Dataset Summary */}
             {(() => {
-              const lines = (csvContent || "").split('\\n').filter(l => l.trim().length > 0)
+              const lines = (csvContent || "").split(/\r?\n/).filter(l => l.trim().length > 0)
               const dataLines = lines.slice(1) // skip header
               
               const uniqueEntities = new Set<string>()
@@ -297,7 +297,7 @@ export function DatasetInputPanel({ onDatasetLoaded, onGenerateNetwork, hasDatas
                 </thead>
                 <tbody className="divide-y divide-shield-cyan/5">
                   {(() => {
-                    const lines = (csvContent || "").split('\\n').filter(l => l.trim().length > 0)
+                    const lines = (csvContent || "").split(/\r?\n/).filter(l => l.trim().length > 0)
                     const previewLines = lines.slice(1, 5) // up to 4 rows
                     
                     if (previewLines.length === 0) {
