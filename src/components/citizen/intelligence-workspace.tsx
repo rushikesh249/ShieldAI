@@ -1,6 +1,7 @@
 "use client"
 
 import { ThreatVerdict } from "@/lib/types/citizen"
+import { useLanguage } from "@/lib/i18n/language-context"
 import { ShieldAlert, AlertTriangle, Info, CheckCircle2, Copy, FileText, Activity, ShieldCheck, XCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
+  const { t } = useLanguage()
+
   if (!verdict) {
     return (
       <div className="flex flex-col min-h-[400px] lg:min-h-[560px] h-fit rounded-xl border border-shield-cyan/15 bg-shield-navy-light/50 p-5 shadow-xl shadow-shield-cyan/5 sm:p-6">
@@ -17,9 +20,9 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
           <div className="mb-6 rounded-full bg-shield-cyan/5 p-4 ring-1 ring-shield-cyan/20">
             <Activity className="h-12 w-12 text-shield-cyan/50" />
           </div>
-          <h3 className="text-lg font-semibold text-white">Intelligence Awaiting Analysis</h3>
+          <h3 className="text-lg font-semibold text-white">{t("intel_awaiting_title")}</h3>
           <p className="mt-2 max-w-[280px] text-sm text-shield-muted">
-            Threat score, explainable evidence, detected entities, and safety recommendations will appear here after analysis.
+            {t("intel_awaiting_desc")}
           </p>
         </div>
       </div>
@@ -33,6 +36,16 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
       case "Medium": return "text-shield-warning bg-shield-warning/10 border-shield-warning/20"
       case "Informational": return "text-shield-cyan bg-shield-cyan/10 border-shield-cyan/20"
       default: return "text-shield-muted bg-shield-navy border-shield-cyan/10"
+    }
+  }
+
+  const getSeverityLabel = (severity: string) => {
+    switch (severity) {
+      case "Critical": return t("sev_critical")
+      case "High": return t("sev_high")
+      case "Medium": return t("sev_medium")
+      case "Informational": return t("sev_info")
+      default: return severity
     }
   }
 
@@ -53,7 +66,7 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
       <div>
         <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-shield-muted">
           <ShieldAlert className="h-4 w-4 text-shield-cyan" />
-          Explainable Evidence
+          {t("explainable_evidence")}
         </h3>
         <div className="space-y-2">
           {verdict.evidence.map((item, idx) => (
@@ -63,7 +76,7 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-white">{item.label}</span>
                   <span className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider border ${getSeverityColor(item.severity)}`}>
-                    {item.severity}
+                    {getSeverityLabel(item.severity)}
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-shield-muted">{item.explanation}</p>
@@ -78,7 +91,7 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
         <div className="mt-4">
           <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-shield-muted">
             <Activity className="h-4 w-4 text-shield-cyan" />
-            Detected Entities
+            {t("detected_entities")}
           </h3>
           <div className="grid gap-2 sm:grid-cols-2">
             {verdict.entities.map((entity, idx) => (
@@ -106,7 +119,7 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
       <div className="mt-4">
         <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-shield-muted">
           <ShieldCheck className="h-4 w-4 text-shield-safe" />
-          Safety Recommendations
+          {t("safety_recommendations")}
         </h3>
         <ul className="space-y-2 rounded-lg border border-shield-safe/20 bg-shield-safe/5 p-4">
           {verdict.recommendations.map((rec, idx) => (
@@ -126,7 +139,7 @@ export function IntelligenceWorkspace({ verdict, onGenerateDraft }: Props) {
           className="w-full border-shield-cyan/30 bg-shield-cyan/5 py-6 text-sm font-semibold text-white hover:bg-shield-cyan/10 hover:border-shield-cyan/50"
         >
           <FileText className="mr-2 h-4 w-4 text-shield-cyan" />
-          Generate Complaint Draft
+          {t("generate_draft_btn")}
         </Button>
       </div>
 

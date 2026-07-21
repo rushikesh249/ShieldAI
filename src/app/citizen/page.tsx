@@ -9,9 +9,11 @@ import { IntelligenceWorkspace } from "@/components/citizen/intelligence-workspa
 import { ComplaintDraftModal } from "@/components/citizen/complaint-draft-modal"
 import { ThreatInput, AnalysisState, ThreatVerdict } from "@/lib/types/citizen"
 import { analyzeThreat } from "@/lib/services/analysis"
-import { Globe } from "lucide-react"
+import { LanguageProvider, useLanguage } from "@/lib/i18n/language-context"
+import { LanguageSelector } from "@/components/language-selector"
 
-export default function CitizenPage() {
+function CitizenContent() {
+  const { t } = useLanguage()
   const [input, setInput] = useState<ThreatInput>({
     source: "WhatsApp",
     text: "",
@@ -21,11 +23,9 @@ export default function CitizenPage() {
   const [analysisState, setAnalysisState] = useState<AnalysisState>("idle")
   const [verdict, setVerdict] = useState<ThreatVerdict | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [language, setLanguage] = useState<"en" | "hi">("en")
 
   const handleInputChange = (updates: Partial<ThreatInput>) => {
     setInput(prev => ({ ...prev, ...updates }))
-    // Reset analysis if input changes
     if (analysisState !== "idle") {
       setAnalysisState("idle")
       setVerdict(null)
@@ -57,28 +57,14 @@ export default function CitizenPage() {
       <main className="relative flex-1 pt-24 pb-8 lg:pt-24">
         <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
           
-          {/* Header & Language Toggle */}
+          {/* Header & Language Selector */}
           <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-shield-cyan/10 pb-4 gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">AI Citizen Fraud Shield</h1>
-              <p className="text-sm text-shield-muted">Secure, explainable threat analysis for public safety.</p>
+              <h1 className="text-2xl font-bold text-white tracking-tight">{t("page_title")}</h1>
+              <p className="text-sm text-shield-muted">{t("page_subtitle")}</p>
             </div>
             
-            <div className="flex items-center gap-2 rounded-lg border border-shield-cyan/20 bg-shield-navy-light/50 p-1">
-              <Globe className="ml-2 h-4 w-4 text-shield-muted" />
-              <button 
-                onClick={() => setLanguage("en")}
-                className={`rounded px-3 py-1 text-xs font-medium transition-colors ${language === "en" ? "bg-shield-cyan/20 text-shield-cyan" : "text-shield-muted hover:text-white"}`}
-              >
-                English
-              </button>
-              <button 
-                onClick={() => setLanguage("hi")}
-                className={`rounded px-3 py-1 text-xs font-medium transition-colors ${language === "hi" ? "bg-shield-cyan/20 text-shield-cyan" : "text-shield-muted hover:text-white"}`}
-              >
-                हिंदी
-              </button>
-            </div>
+            <LanguageSelector />
           </div>
 
           {/* 3-Zone Workspace */}
@@ -122,5 +108,13 @@ export default function CitizenPage() {
         input={input}
       />
     </div>
+  )
+}
+
+export default function CitizenPage() {
+  return (
+    <LanguageProvider>
+      <CitizenContent />
+    </LanguageProvider>
   )
 }

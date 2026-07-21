@@ -3,6 +3,7 @@
 import { useState, useRef } from "react"
 import { ThreatInput, InputSource } from "@/lib/types/citizen"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/lib/i18n/language-context"
 import { 
   MessageSquare, 
   Smartphone, 
@@ -34,6 +35,7 @@ const SOURCES: { id: InputSource; icon: React.ElementType; label: string }[] = [
 ]
 
 export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyzing }: Props) {
+  const { t, currentLanguage } = useLanguage()
   const [showAdditional, setShowAdditional] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [recordingError, setRecordingError] = useState<string | null>(null)
@@ -83,6 +85,8 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
       recognitionRef.current = new SpeechRecognition()
       recognitionRef.current.continuous = true
       recognitionRef.current.interimResults = true
+      // Set speech recognition language to selected Indian language locale (e.g. hi-IN, ta-IN, bn-IN)
+      recognitionRef.current.lang = currentLanguage.speechLocale
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       recognitionRef.current.onresult = (event: any) => {
@@ -116,9 +120,9 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
   return (
     <div className="flex flex-col h-fit rounded-xl border border-shield-cyan/15 bg-shield-navy-light/50 p-5 shadow-xl shadow-shield-cyan/5 sm:p-6">
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-white">Analyze a Suspicious Communication</h2>
+        <h2 className="text-xl font-semibold text-white">{t("input_workspace_title")}</h2>
         <p className="mt-2 text-sm text-shield-muted">
-          Submit a suspicious message, voice transcript, screenshot, or payment request for explainable AI-assisted risk analysis.
+          {t("input_workspace_subtitle")}
         </p>
       </div>
 
@@ -126,7 +130,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
         {/* Source Selector */}
         <div>
           <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-shield-muted/70">
-            Source
+            {t("source_label")}
           </label>
           <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
             {SOURCES.map((src) => (
@@ -150,25 +154,25 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
         <div>
           <div className="mb-2 flex items-center justify-between">
             <label className="text-xs font-semibold uppercase tracking-wider text-shield-muted/70">
-              Communication Text
+              {t("comm_text_label")}
             </label>
             {input.text.length > 0 && (
               <button
                 onClick={() => onInputChange({ text: "" })}
                 className="text-[10px] text-shield-muted hover:text-white"
               >
-                Clear
+                {t("clear_btn")}
               </button>
             )}
           </div>
           <textarea
             value={input.text}
             onChange={(e) => onInputChange({ text: e.target.value })}
-            placeholder="Paste a suspicious WhatsApp message, SMS, email, payment request, or digital-arrest warning here..."
+            placeholder={t("input_placeholder")}
             className="h-32 w-full resize-none rounded-lg border border-shield-cyan/10 bg-shield-navy/40 p-3 text-sm text-white placeholder-shield-muted/40 transition-colors focus:border-shield-cyan/40 focus:outline-none focus:ring-1 focus:ring-shield-cyan/40"
           />
           <div className="mt-1.5 text-right text-[10px] text-shield-muted/50">
-            {input.text.length} characters
+            {t("char_count", { count: input.text.length })}
           </div>
         </div>
 
@@ -185,7 +189,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
               }`}
             >
               <Mic className={`h-4 w-4 ${isRecording ? "animate-pulse" : ""}`} />
-              {isRecording ? "Listening..." : "Speak Message"}
+              {isRecording ? t("listening_btn") : t("speak_msg_btn")}
             </button>
             {recordingError && <p className="mt-2 text-[10px] text-shield-critical">{recordingError}</p>}
           </div>
@@ -211,7 +215,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
             ) : (
               <div className="flex h-full flex-col items-center justify-center p-3 text-center">
                 <Upload className="mb-1 h-4 w-4 text-shield-muted/60" />
-                <span className="text-[10px] text-shield-muted">Drag screenshot or <button onClick={() => fileInputRef.current?.click()} className="text-shield-cyan hover:underline">browse</button></span>
+                <span className="text-[10px] text-shield-muted">{t("drop_screenshot_text")}</span>
                 <input ref={fileInputRef} type="file" accept="image/png, image/jpeg, image/webp" className="hidden" onChange={handleFileChange} />
               </div>
             )}
@@ -271,7 +275,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
           disabled={!isValidInput || isAnalyzing}
           className="w-full bg-shield-cyan py-6 text-base font-semibold text-shield-navy hover:bg-shield-cyan/90 disabled:opacity-50"
         >
-          {isAnalyzing ? "Analyzing Intelligence..." : "Analyze Threat"}
+          {isAnalyzing ? t("analyzing_btn") : t("analyze_btn")}
         </Button>
       </div>
     </div>
