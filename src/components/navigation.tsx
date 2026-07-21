@@ -15,6 +15,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ShieldAILogo } from "@/components/shield-logo"
+import { LanguageSelector } from "@/components/language-selector"
 import { cn } from "@/lib/utils"
 
 const navItems = [
@@ -129,8 +130,10 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Right: Desktop CTAs & Dropdown */}
-          <div className="hidden lg:flex lg:items-center lg:gap-6">
+          {/* Right: Desktop CTAs, Language Selector & Dropdown */}
+          <div className="hidden lg:flex lg:items-center lg:gap-4">
+            <LanguageSelector />
+
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -178,7 +181,7 @@ export function Navigation() {
               </div>
             </div>
 
-            <Button asChild size="sm" className="h-9 whitespace-nowrap bg-shield-cyan text-shield-navy transition-all hover:bg-shield-cyan/90">
+            <Button asChild size="sm" className="h-9 whitespace-nowrap bg-shield-cyan text-shield-navy transition-all hover:bg-shield-cyan/90 font-semibold">
               <Link href="/citizen">Launch ShieldAI</Link>
             </Button>
           </div>
@@ -217,6 +220,12 @@ export function Navigation() {
         >
           <div className="flex flex-col px-6 pt-6 pb-24">
             
+            {/* Mobile Language Selector */}
+            <div className="mb-6 flex items-center justify-between rounded-lg border border-shield-cyan/15 bg-shield-navy-light/40 p-3">
+              <span className="text-xs font-semibold text-shield-muted">Language / भाषा</span>
+              <LanguageSelector />
+            </div>
+
             <div className="mb-6">
               <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-shield-muted">Platform Modules</h3>
               <div className="grid gap-2">

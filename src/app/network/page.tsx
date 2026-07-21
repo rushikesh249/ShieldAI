@@ -9,9 +9,11 @@ import { EntityIntelligencePanel } from "@/components/network/entity-intelligenc
 import { InvestigationDetails } from "@/components/network/investigation-details"
 import { InvestigationDataset, NetworkAnalysisState } from "@/lib/types/network"
 import { analyzeNetworkDataset } from "@/lib/services/network"
+import { useLanguage } from "@/lib/i18n/language-context"
 import { ShieldCheck, Network, Eye } from "lucide-react"
 
 export default function NetworkPage() {
+  const { t } = useLanguage()
   const [csvContent, setCsvContent] = useState<string>("")
   const [analysisState, setAnalysisState] = useState<NetworkAnalysisState>("idle")
   const [dataset, setDataset] = useState<InvestigationDataset | null>(null)
@@ -63,9 +65,9 @@ export default function NetworkPage() {
           {/* Header & Status Badges */}
           <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between border-b border-shield-cyan/10 pb-4 gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">AI Fraud Network Analysis & Investigation</h1>
+              <h1 className="text-2xl font-bold text-white tracking-tight">{t("network_title")}</h1>
               <p className="mt-1 max-w-3xl text-sm text-shield-muted">
-                Transform transaction and call-record data into explainable network intelligence for faster investigation and risk prioritization.
+                {t("network_subtitle")}
               </p>
             </div>
             

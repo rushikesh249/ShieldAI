@@ -8,9 +8,11 @@ import { CurrencyPreviewPanel } from "@/components/currency/currency-preview-pan
 import { CurrencyIntelligencePanel } from "@/components/currency/currency-intelligence-panel"
 import { CurrencyInput, CurrencyAnalysisState, CurrencyAnalysisResult } from "@/lib/types/currency"
 import { analyzeCurrency } from "@/lib/services/currency"
+import { useLanguage } from "@/lib/i18n/language-context"
 import { ShieldCheck, Cpu, Eye } from "lucide-react"
 
 export default function CurrencyPage() {
+  const { t } = useLanguage()
   const [input, setInput] = useState<CurrencyInput>({
     imageFile: null,
     imagePreviewUrl: null,
@@ -24,14 +26,12 @@ export default function CurrencyPage() {
 
   const handleInputChange = (updates: Partial<CurrencyInput>) => {
     setInput(prev => {
-      // If we're removing the image, we should revoke the object URL to avoid memory leaks
       if (updates.imagePreviewUrl === null && prev.imagePreviewUrl) {
         URL.revokeObjectURL(prev.imagePreviewUrl)
       }
       return { ...prev, ...updates }
     })
     
-    // Reset analysis state if input changes
     if (analysisState !== "idle") {
       setAnalysisState("idle")
       setResult(null)
@@ -77,21 +77,21 @@ export default function CurrencyPage() {
           {/* Header & Status Badges */}
           <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between border-b border-shield-cyan/10 pb-4 gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">AI Counterfeit Currency Detection & Verification</h1>
+              <h1 className="text-2xl font-bold text-white tracking-tight">{t("currency_title")}</h1>
               <p className="mt-1 max-w-2xl text-sm text-shield-muted">
-                AI-assisted preliminary screening of currency security features using computer vision and explainable intelligence.
+                {t("currency_subtitle")}
               </p>
             </div>
             
             <div className="flex flex-wrap items-center gap-2">
               <div className="flex items-center gap-1.5 rounded-md border border-shield-cyan/20 bg-shield-navy-light/50 px-2 py-1 text-[10px] font-medium text-shield-cyan">
-                <ShieldCheck className="h-3 w-3" /> Secure Image Processing
+                <ShieldCheck className="h-3 w-3" /> {t("currency_tag_1")}
               </div>
               <div className="flex items-center gap-1.5 rounded-md border border-shield-cyan/20 bg-shield-navy-light/50 px-2 py-1 text-[10px] font-medium text-shield-cyan">
-                <Cpu className="h-3 w-3" /> Vision Engine Ready
+                <Cpu className="h-3 w-3" /> {t("currency_tag_2")}
               </div>
               <div className="flex items-center gap-1.5 rounded-md border border-shield-cyan/20 bg-shield-cyan/10 px-2 py-1 text-[10px] font-medium text-shield-cyan">
-                <Eye className="h-3 w-3" /> Prototype Screening
+                <Eye className="h-3 w-3" /> {t("currency_tag_3")}
               </div>
             </div>
           </div>

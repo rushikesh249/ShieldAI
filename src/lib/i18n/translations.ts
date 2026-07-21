@@ -65,6 +65,17 @@ export type TranslationKey =
   | "sev_medium"
   | "sev_info"
   | "complaint_narrative_template"
+  | "currency_title"
+  | "currency_subtitle"
+  | "currency_tag_1"
+  | "currency_tag_2"
+  | "currency_tag_3"
+  | "network_title"
+  | "network_subtitle"
+  | "geospatial_title"
+  | "geospatial_subtitle"
+  | "command_title"
+  | "command_subtitle"
 
 export const translations: Record<LanguageCode, Record<TranslationKey, string>> = {
   en: {
@@ -132,7 +143,18 @@ export const translations: Record<LanguageCode, Record<TranslationKey, string>> 
 
 Based on ShieldAI risk intelligence, this communication displays indicators of {category}. The sender created false urgency and suspicious demands.
 
-I request official investigation by law enforcement.`
+I request official investigation by law enforcement.`,
+    currency_title: "AI Counterfeit Currency Detection & Verification",
+    currency_subtitle: "AI-assisted preliminary screening of currency security features using computer vision and explainable intelligence.",
+    currency_tag_1: "Secure Image Processing",
+    currency_tag_2: "Vision Engine Ready",
+    currency_tag_3: "Prototype Screening",
+    network_title: "AI Fraud Network Analysis & Investigation",
+    network_subtitle: "Discover connected entities, fraud clusters, transaction paths, and intelligence graphs across reported incidents.",
+    geospatial_title: "Geospatial Crime Intelligence & Hotspot Analysis",
+    geospatial_subtitle: "Real-time geographic mapping of fraud hotspots, threat density, and intelligence deployment patterns across India.",
+    command_title: "Police Investigation & Command Dashboard",
+    command_subtitle: "Unified AI-assisted intelligence engine for case prioritization, suspect correlation, and threat monitoring."
   },
   hi: {
     page_title: "एआई नागरिक धोखाधड़ी सुरक्षा शील्ड",
@@ -199,7 +221,18 @@ I request official investigation by law enforcement.`
 
 ShieldAI विश्लेषण के अनुसार, यह {category} के लक्षण दर्शाता है। प्रेषक ने फर्जी डर और फर्जी आपातस्थिति पैदा की।
 
-कृपया आधिकारिक जांच करें।`
+कृपया आधिकारिक जांच करें।`,
+    currency_title: "एआई जाली मुद्रा पहचान एवं सत्यापन",
+    currency_subtitle: "कंप्यूटर विज़न और पारदर्शी एआई का उपयोग करके भारतीय मुद्रा नोटों की सुरक्षा सुविधाओं की जांच।",
+    currency_tag_1: "सुरक्षित इमेज प्रोसेसिंग",
+    currency_tag_2: "विज़न इंजन तैयार",
+    currency_tag_3: "प्रारंभिक जांच",
+    network_title: "एआई साइबर धोखाधड़ी नेटवर्क विश्लेषण",
+    network_subtitle: "संदिग्ध नंबरों, धोखाधड़ी गिरोहों और वित्तीय लेन-देन के नेटवर्क का खुलासा करें।",
+    geospatial_title: "भौगोलिक साइबर अपराध विश्लेषण एवं हॉटस्पॉट मैपिंग",
+    geospatial_subtitle: "भारत भर में साइबर अपराध के हॉटस्पॉट, जोखिम घनत्व और पुलिस तैनाती का रियल-टाइम मानचित्र।",
+    command_title: "पुलिस जांच एवं कमान डैशबोर्ड",
+    command_subtitle: "मामलों की प्राथमिकता, संदिग्धों के संबंध और खतरे की निगरानी के लिए एकीकृत पुलिस इंटेलिजेंस डैशबोर्ड।"
   },
   bn: {
     page_title: "এআই নাগরিক জালিয়াতি সুরক্ষা শিল্ড",
@@ -264,7 +297,18 @@ ShieldAI विश्लेषण के अनुसार, यह {category} �
     sev_info: "তথ্যমূলক",
     complaint_narrative_template: `আমি {source} এর মাধ্যমে পাওয়া একটি সন্দেহজনক বার্তার রিপোর্ট করছি। বার্তা: "{text}"।
 
-ShieldAI বিশ্লেষণের ভিত্তিতে এটি {category} এর লক্ষণ নির্দেশ করে। আইনগত ব্যবস্থা নেওয়ার জন্য আবেদন করা হচ্ছে।`
+ShieldAI বিশ্লেষণের ভিত্তিতে এটি {category} এর লক্ষণ নির্দেশ করে। আইনগত ব্যবস্থা নেওয়ার জন্য আবেদন করা হচ্ছে।`,
+    currency_title: "এআই জাল নোট শনাক্তকরণ ও যাচাইকরণ",
+    currency_subtitle: "কম্পিউটার ভিশন এবং এআই প্রযুক্তির মাধ্যমে নোটের নিরাপত্তা বৈশিষ্ট্য পরীক্ষা।",
+    currency_tag_1: "নিরাপদ ইমেজ প্রসেসিং",
+    currency_tag_2: "ভিশন ইঞ্জিন প্রস্তুত",
+    currency_tag_3: "প্রাথমিক পরীক্ষা",
+    network_title: "এআই অপরাধী নেটওয়ার্ক বিশ্লেষণ",
+    network_subtitle: "প্রতারক চক্র এবং সন্দেহজনক লেনদেনের নেটওয়ার্ক উদঘাটন করুন।",
+    geospatial_title: "ভৌগোলিক অপরাধ বিশ্লেষণ ও হটস্পট ম্যাপ",
+    geospatial_subtitle: "ভারত জুড়ে সাইবার অপরাধের হটস্পট ও ঝুঁকির মানচিত্র।",
+    command_title: "পুলিশ তদন্ত ও কমান্ড ড্যাশবোর্ড",
+    command_subtitle: "অপরাধীদের তথ্য ও মামলা পরিচালনার জন্য সমন্বিত ড্যাশবোর্ড।"
   },
   te: {
     page_title: "AI పౌర మోసాల నివారణ షీల్డ్",
@@ -329,7 +373,18 @@ ShieldAI বিশ্লেষণের ভিত্তিতে এটি {cate
     sev_info: "సమాచారం",
     complaint_narrative_template: `నేను {source} ద్వారా వచ్చిన అనుమానాస్పద సందేశాన్ని నివేదిస్తున్నాను. సందేశం: "{text}".
 
-ShieldAI విశ్లేషణ ప్రకారం ఇది {category} లక్షణాలను కలిగి ఉంది. తదుపరి విచారణ జరపవలసిందిగా మనవి.`
+ShieldAI విశ్లేషణ ప్రకారం ఇది {category} లక్షణాలను కలిగి ఉంది. తదుపరి విచారణ జరపవలసిందిగా మనవి.`,
+    currency_title: "AI నకిలీ నోట్ల గుర్తింపు మరియు తనిఖీ",
+    currency_subtitle: "కంప్యూటర్ విజన్ ద్వారా కరెన్సీ నోట్ల భద్రతా ఫీచర్ల ప్రాథమిక పరిశీలన.",
+    currency_tag_1: "భద్రమైన ఇమేజ్ ప్రాసెసింగ్",
+    currency_tag_2: "విజన్ ఇంజిన్ సిద్ధంగా ఉంది",
+    currency_tag_3: "ప్రారంభ తనిఖీ",
+    network_title: "AI నేరాల నెట్‌వర్క్ విశ్లేషణ",
+    network_subtitle: "మోసపూరిత ముఠాలు మరియు అనుమానాస్పద లావాదేవీలను గుర్తించండి.",
+    geospatial_title: "భౌగోళిక నేర విశ్లేషణ మరియు మ్యాపింగ్",
+    geospatial_subtitle: "భారతదేశం అంతటా సైబర్ నేర ప్రాంతాల రియల్-టైమ్ మ్యాపింగ్.",
+    command_title: "పోలీస్ ఇన్వెస్టిగేషన్ కమాండ్ డాష్‌బోర్డ్",
+    command_subtitle: "కేసుల ప్రాధాన్యత మరియు నేరస్థుల గుర్తింపు కోసం ఏకీకృత వ్యవస్థ."
   },
   mr: {
     page_title: "एआय नागरिक फसवणूक प्रतिबंधक शील्ड",
@@ -394,7 +449,18 @@ ShieldAI విశ్లేషణ ప్రకారం ఇది {category} ల
     sev_info: "माहितीपूर्ण",
     complaint_narrative_template: `मी {source} द्वारे मिळालेल्या संशयास्पद संदेशाची तक्रार करत आहे. संदेश: "{text}".
 
-ShieldAI विश्लेषानुसार हे {category} चे लक्षण दर्शवते. कृपया कायदेशीर कारवाई करावी.`
+ShieldAI विश्लेषानुसार हे {category} चे लक्षण दर्शवते. कृपया कायदेशीर कारवाई करावी.`,
+    currency_title: "एआय बनावट नोटा ओळख व पडताळणी",
+    currency_subtitle: "संगणक व्हिजन आणि एआय द्वारे भारतीय चलनातील सुरक्षा वैशिष्ट्यांची तपासणी.",
+    currency_tag_1: "सुरक्षित इमेज प्रोसेसिंग",
+    currency_tag_2: "व्हिजन इंजिन सज्ज",
+    currency_tag_3: "प्राथमिक तपासणी",
+    network_title: "एआय सायबर फसवणूक नेटवर्क विश्लेषण",
+    network_subtitle: "संशयास्पद नंबर, टोळ्या आणि आर्थिक व्यवहारांचे जाळे शोधा.",
+    geospatial_title: "भौगोलिक सायबर गुन्हे विश्लेषण व नकाशा",
+    geospatial_subtitle: "भारतभरातील गुन्हेगारी हॉटस्पॉट आणि धोक्याचा प्रत्यक्ष नकाशा.",
+    command_title: "पोलिस तपास आणि कमांड डॅशबोर्ड",
+    command_subtitle: "तपास, संशयितांचे संबंध आणि गुन्हेगारी नियंत्रणासाठी एकात्मिक डॅशबोर्ड."
   },
   ta: {
     page_title: "AI குடிமக்கள் மோசடி தடுப்பு கவசம்",
@@ -459,7 +525,18 @@ ShieldAI विश्लेषानुसार हे {category} चे लक
     sev_info: "தகவல்",
     complaint_narrative_template: `நான் {source} மூலம் பெறப்பட்ட சந்தேகத்திற்குரிய செய்தியைப் பற்றி புகாரளிக்கிறேன். செய்தி: "{text}".
 
-ShieldAI பகுப்பாய்வின்படி இது {category} இன் அறிகுறிகளைக் காட்டுகிறது. உரிய நடவடிக்கை எடுக்கக் கேட்டுக்கொள்கிறேன்.`
+ShieldAI பகுப்பாய்வின்படி இது {category} இன் அறிகுறிகளைக் காட்டுகிறது. உரிய நடவடிக்கை எடுக்கக் கேட்டுக்கொள்கிறேன்.`,
+    currency_title: "AI கள்ளப் பண கண்டறிதல் மற்றும் சரிபார்ப்பு",
+    currency_subtitle: "கணினி பார்வை தொழில்நுட்பம் மூலம் ரூபாய் நோட்டுகளின் பாதுகாப்பு அம்சங்களை ஆராய்தல்.",
+    currency_tag_1: "பாதுகாப்பான படச் செயலாக்கம்",
+    currency_tag_2: "விஷன் எஞ்சின் தயார்",
+    currency_tag_3: "தொடக்க நிலை ஆய்வு",
+    network_title: "AI மோசடி பிணைய பகுப்பாய்வு",
+    network_subtitle: "சந்தேகத்திற்குரிய நெட்வொர்க்குகள் மற்றும் நிதி பரிவர்த்தனைகளைக் கண்டறியவும்.",
+    geospatial_title: "புவியியல் குற்ற பகுப்பாய்வு வரைபடம்",
+    geospatial_subtitle: "இந்தியா முழுவதிலும் உள்ள சைபர் குற்றப் பகுதிகளின் நேரலை வரைபடம்.",
+    command_title: "காவல்துறை விசாரணை மற்றும் கட்டளை தளம்",
+    command_subtitle: "வழக்குகள் மற்றும் குற்றவாளிகளைக் கண்காணிக்க ஒருங்கிணைக்கப்பட்ட தளம்."
   },
   gu: {
     page_title: "AI નાગરિક છેતરપિંડી સુરક્ષા કવચ",
@@ -524,7 +601,18 @@ ShieldAI பகுப்பாய்வின்படி இது {category} �
     sev_info: "માહિતીપ્રદ",
     complaint_narrative_template: `હું {source} દ્વારા મળેલા શંકાસ્પદ સંદેશની જાણ કરી રહ્યો છું. સંદેશ: "{text}".
 
-ShieldAI વિશ્લેષણ મુજબ આ {category} ના લક્ષણો દર્શાવે છે. કૃપા કરીને તપાસ કરો.`
+ShieldAI વિશ્લેષણ મુજબ આ {category} ના લક્ષણો દર્શાવે છે. કૃપા કરીને તપાસ કરો.`,
+    currency_title: "AI બનાવટી ચલણી નોટ ચકાસણી",
+    currency_subtitle: "કમ્પ્યુટર વિઝન દ્વારા ચલણી નોટોની સુરક્ષા લાક્ષણિકતાઓની ચકાસણી.",
+    currency_tag_1: "સુરક્ષિત ઈમેજ પ્રોસેસિંગ",
+    currency_tag_2: "વિઝન એન્જિન તૈયાર",
+    currency_tag_3: "પ્રારંભિક ચકાસણી",
+    network_title: "AI સાયબર છેતરપિંડી નેટવર્ક વિશ્લેષણ",
+    network_subtitle: "શંકાસ્પદ નંબરો અને છેતરપિંડીની ગેંગનું નેટવર્ક શોધો.",
+    geospatial_title: "ભૌગોલિક સાયબર ગુના વિશ્લેષણ નકશો",
+    geospatial_subtitle: "સમગ્ર ભારતમાં સાયબર ગુનાના હોટસ્પોટ્સનો લાઈવ નકશો.",
+    command_title: "પોલીસ તપાસ અને કમાન્ડ ડેશબોર્ડ",
+    command_subtitle: "તપાસ અને શંકાસ્પદોની દેખરેખ માટેનું એકીકૃત સિસ્ટમ."
   },
   ur: {
     page_title: "اے آئی شہری فراڈ تحفظ شیلڈ",
@@ -589,7 +677,18 @@ ShieldAI વિશ્લેષણ મુજબ આ {category} ના લક્�
     sev_info: "معلومات",
     complaint_narrative_template: `میں {source} کے ذریعے موصول ہونے والے مشکوک پیغام کی رپورٹ کر رہا ہوں۔ پیغام: "{text}"۔
 
-ShieldAI تجزیہ کے مطابق یہ {category} کی علامات ظاہر کرتا ہے۔ مناسب قانونی کارروائی کی درخواست ہے۔`
+ShieldAI تجزیہ کے مطابق یہ {category} کی علامات ظاہر کرتا ہے۔ مناسب قانونی کارروائی کی درخواست ہے۔`,
+    currency_title: "اے آئی جعلی کرنسی کی شناخت اور تصدیق",
+    currency_subtitle: "کمپیوٹر ویژن کے ذریعے کرنسی نوٹوں کے سیکیورٹی فیچرز کی جانچ۔",
+    currency_tag_1: "محفوظ امیج پروسیسنگ",
+    currency_tag_2: "ویژن انجن تیار",
+    currency_tag_3: "ابتدائی جانچ",
+    network_title: "اے آئی فراڈ نیٹ ورک تجزیہ",
+    network_subtitle: "مشکوک نمبرز اور فراڈ گروہوں کے نیٹ ورک کو بے نقاب کریں۔",
+    geospatial_title: "جغرافیائی سائبر جرم تجزیہ اور میپنگ",
+    geospatial_subtitle: "پورے ہندوستان میں سائبر جرائم کے ہاٹ اسپاٹس کا لائیو نقشہ۔",
+    command_title: "پولیس تفتیش اور کمانڈ ڈیش بورڈ",
+    command_subtitle: "تفتیش اور ملزمان کی نگرانی کے لیے مربوط پولیس ڈیش بورڈ۔"
   },
   kn: {
     page_title: "AI ನಾಗರಿಕ ವಂಚನೆ ತಡೆ ಶೀಲ್ಡ್",
@@ -654,17 +753,28 @@ ShieldAI تجزیہ کے مطابق یہ {category} کی علامات ظاہر �
     sev_info: "ಮಾಹಿತಿದಾಯಕ",
     complaint_narrative_template: `ನಾನು {source} ಮೂಲಕ ಬಂದ ಸಂಶಯಾಸ್ಪದ ಸಂದೇಶದ ಬಗ್ಗೆ ವರದಿ ಮಾಡುತ್ತಿದ್ದೇನೆ. ಸಂದೇಶ: "{text}".
 
-ShieldAI ವಿಶ್ಲೇಷಣೆಯ ಪ್ರಕಾರ ಇದು {category} ನ ಲಕ್ಷಣಗಳನ್ನು ಹೊಂದಿದೆ. ಸೂಕ್ತ ಕ್ರಮ ಕೈಗೊಳ್ಳಲು ವಿನಂತಿ.`
+ShieldAI ವಿಶ್ಲೇಷಣೆಯ ಪ್ರಕಾರ ಇದು {category} ನ ಲಕ್ಷಣಗಳನ್ನು ಹೊಂದಿದೆ. ಸೂಕ್ತ ಕ್ರಮ ಕೈಗೊಳ್ಳಲು ವಿನಂತಿ.`,
+    currency_title: "AI ನಕಲಿ ನೋಟು ಪತ್ತೆ ಮತ್ತು ಪರಿಶೀಲನೆ",
+    currency_subtitle: "ಕಂಪ್ಯೂಟರ್ ವಿಷನ್ ಮೂಲಕ ಭಾರತೀಯ ನೋಟುಗಳ ಭದ್ರತಾ ವೈಶಿಷ್ಟ್ಯಗಳ ಪರಿಶೀಲನೆ.",
+    currency_tag_1: "ಸುರಕ್ಷಿತ ಇಮೇಜ್ ಪ್ರೊಸೆಸಿಂಗ್",
+    currency_tag_2: "ವಿಷನ್ ಇಂಜಿನ್ ಸಿದ್ಧವಾಗಿದೆ",
+    currency_tag_3: "ಪ್ರಾಥಮಿಕ ತಪಾಸಣೆ",
+    network_title: "AI ಸೈಬರ್ ವಂಚನೆ ಜಾಲ ವಿಶ್ಲೇಷಣೆ",
+    network_subtitle: "ಸಂಶಯಾಸ್ಪದ ಸಂಖ್ಯೆಗಳು ಮತ್ತು ವಂಚನೆ ಜಾಲಗಳನ್ನು ಪತ್ತೆ ಮಾಡಿ.",
+    geospatial_title: "ಭೌಗೋಳಿಕ ಸೈಬರ್ ಅಪರಾಧ ವಿಶ್ಲೇಷಣೆ ಮತ್ತು ನಕ್ಷೆ",
+    geospatial_subtitle: "ಭಾರತದಾದ್ಯಂತ ಸೈಬರ್ ಅಪರಾಧ ವಲಯಗಳ ಲೈವ್ ನಕ್ಷೆ.",
+    command_title: "ಪೋಲಿಸ್ ತನಿಖೆ ಮತ್ತು ಕಮಾಂಡ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    command_subtitle: "ತನಿಖೆ ಮತ್ತು ಅಪರಾಧಿಗಳ ಮೇಲ್ವಿಚಾರಣೆಗಾಗಿ ಏಕೀಕೃತ ವ್ಯವಸ್ಥೆ."
   },
   or: {
-    page_title: "AI નાગରିକ ଠକାମି ସୁରକ୍ଷା ଶିଲ୍ଡ",
+    page_title: "AI નાગରିક ଠକାମି ସୁରକ୍ଷା ଶିଲ୍ଡ",
     page_subtitle: "ସାଧାରଣ ସୁରକ୍ଷା ପାଇଁ ସୁରକ୍ଷିତ ଏବଂ ସ୍ପଷ୍ଟ ବିପଦ ବିଶ୍ଳେଷଣ।",
     input_workspace_title: "ସନ୍ଦେହଜନକ ସନ୍ଦେଶର ବିଶ୍ଳେଷଣ କରନ୍ତୁ",
     input_workspace_subtitle: "AI ବିଶ୍ଳେଷଣ ପାଇଁ ସନ୍ଦେହଜନକ ମେସେଜ୍, SMS କିମ୍ବା ସ୍କ୍ରିନସଟ୍ ଦିଅନ୍ତୁ।",
     source_label: "ଉତ୍ସ",
     comm_text_label: "ସନ୍ଦେଶ ବିବରଣୀ",
     clear_btn: "ସଫା କରନ୍ତୁ",
-    input_placeholder: "ଏଠାରେ ସନ୍ଦେହଜନକ ମେସେଜ୍, SMS କିମ୍ବା ପେମେଣ୍ଟ ଅନୁରୋଧ පେଷ୍ଟ କରନ୍ତୁ...",
+    input_placeholder: "ଏଠାରେ ସନ୍ଦେହଜନକ ମେସେଜ୍, SMS କିମ୍ବା ପେମେଣ୍ଟ ଅନୁରୋଧ ପେଷ୍ଟ କରନ୍ତୁ...",
     char_count: "{count} ଅକ୍ଷର",
     speak_msg_btn: "କହି ନୋଟ କରନ୍ତୁ",
     listening_btn: "ଶୁଣୁଛି...",
@@ -719,7 +829,18 @@ ShieldAI ವಿಶ್ಲೇಷಣೆಯ ಪ್ರಕಾರ ಇದು {category} 
     sev_info: "ସୂଚନାଯୋଗ୍ୟ",
     complaint_narrative_template: `ମୁଁ {source} ମାଧ୍ୟମରେ ମିଳିଥିବା ସନ୍ଦେହଜନକ ମେସେଜ୍ ବିଷୟରେ ଜଣାଉଛି। ମେସେଜ୍: "{text}"।
 
-ShieldAI ବିଶ୍ଳେଷଣ ଅନୁଯାୟୀ ଏହା {category} ର ଲକ୍ଷଣ ଦର୍ଶାଉଛି। କାର୍ଯ୍ୟାନୁଷ୍ଠାନ ଗ୍ରହଣ ପାଇଁ ଅନୁରୋଧ।`
+ShieldAI ବିଶ୍ଳେଷଣ ଅନୁଯାୟୀ ଏହା {category} ର ଲକ୍ଷଣ ଦର୍ଶାଉଛି। କାର୍ଯ୍ୟାନୁଷ୍ଠାନ ଗ୍ରହଣ ପାଇଁ ଅନୁରୋଧ।`,
+    currency_title: "AI ନକଲି ନୋଟ ଚିହ୍ନଟ ଓ ଯାଞ୍ଚ",
+    currency_subtitle: "କମ୍ପ୍ୟୁଟର ଭିଜନ ଦ୍ୱାରା ନୋଟର ସୁରକ୍ଷା ବୈଶିଷ୍ଟ୍ୟର ଯାଞ୍ଚ।",
+    currency_tag_1: "ସୁରକ୍ଷିତ ଫଟୋ ପ୍ରକ୍ରିୟାକରଣ",
+    currency_tag_2: "ଭିଜନ ଇଞ୍ଜିନ ପ୍ରସ୍ତୁତ",
+    currency_tag_3: "ପ୍ରାରମ୍ଭିକ ଯାଞ୍ଚ",
+    network_title: "AI ସାଇବର ଠକାମି ନେଟୱାର୍କ ବିଶ୍ଳେଷଣ",
+    network_subtitle: "ସନ୍ଦେହଜନକ ନମ୍ବର ଏବଂ ଠକାମି ନେଟୱାର୍କର ଖୁଲାସା କରନ୍ତୁ।",
+    geospatial_title: "ଭୌଗୋଳିକ ଅପରାଧ ବିଶ୍ଳେଷଣ ଏବଂ ମାନଚିତ୍ର",
+    geospatial_subtitle: "ଭାରତରେ ସାଇବର ଅପରାଧ ହଟସପଟର ଲାଇଭ ମାନଚିତ୍ର।",
+    command_title: "ପୋଲିସ ତଦନ୍ତ ଏବଂ କମାଣ୍ଡ ଡ୍ୟାସବୋର୍ଡ",
+    command_subtitle: "ତଦନ୍ତ ଏବଂ ଅପରାଧୀଙ୍କ ଉପରେ ନଜର ରଖିବା ପାଇଁ ସଂଯୋଜିତ ସିଷ୍ଟମ।"
   },
   ml: {
     page_title: "AI പൗര തട്ടിപ്പ് പ്രതിരോധ ഷീൽഡ്",
@@ -784,7 +905,18 @@ ShieldAI ବିଶ୍ଳେଷଣ ଅନୁଯାୟୀ ଏହା {category} ର
     sev_info: "വിവരദായകം",
     complaint_narrative_template: `আমি {source} വഴി ലഭിച്ച സംശയാസ്പദമായ സന്ദേശത്തെക്കുറിച്ച് റിപ്പോർട്ട് ചെയ്യുന്നു. സന്ദേശം: "{text}".
 
-ShieldAI വിശകലനപ്രകാരം ഇത് {category} സൂചന നൽകുന്നു. അന്വേഷണം ആവശ്യപ്പെടുന്നു.`
+ShieldAI വിശകലനപ്രകാരം ഇത് {category} സൂചന നൽകുന്നു. അന്വേഷണം ആവശ്യപ്പെടുന്നു.`,
+    currency_title: "AI വ്യാജ നോട്ടുകൾ കണ്ടെത്തലും പരിശോധനയും",
+    currency_subtitle: "കമ്പ്യൂട്ടർ വിഷൻ വഴി രൂപ നോട്ടുകളുടെ സുരക്ഷാ ഫീച്ചറുകൾ പരിശോധിക്കൽ.",
+    currency_tag_1: "സുരക്ഷിത ഇമേജ് പ്രോസസിംഗ്",
+    currency_tag_2: "വിഷൻ എഞ്ചിൻ സജ്ജമാണ്",
+    currency_tag_3: "പ്രാഥമിക പരിശോധന",
+    network_title: "AI തട്ടിപ്പ് ശൃംഖല വിശകലനം",
+    network_subtitle: "സംശയാസ്പദമായ നമ്പറുകളും തട്ടിപ്പ് ശൃംഖലകളും കണ്ടെത്തുക.",
+    geospatial_title: "ഭൂമിശാസ്ത്രപരമായ കുറ്റകൃത്യ വിശകലന മാപ്പ്",
+    geospatial_subtitle: "ഇന്ത്യയിലുടനീളമുള്ള സൈബർ കുറ്റകൃത്യ മേഖലകളുടെ തത്സമയ ഭൂപടം.",
+    command_title: "പോലീസ് അന്വേഷണ കമാൻഡ് ഡാഷ്‌ബോർഡ്",
+    command_subtitle: "കേസുകളും പ്രതികളെയും നിരീക്ഷിക്കുന്നതിനുള്ള ഏകീകൃത സംവിധാനം."
   },
   pa: {
     page_title: "AI ਨਾਗਰਿਕ ਧੋਖਾਧੜੀ ਸੁਰੱਖਿਆ ਸ਼ੀਲਡ",
@@ -849,7 +981,18 @@ ShieldAI വിശകലനപ്രകാരം ഇത് {category} സൂച�
     sev_info: "ਜਾਣਕਾਰੀ",
     complaint_narrative_template: `ਮੈਂ {source} ਰਾਹੀਂ ਮਿਲੇ ਸ਼ੱਕੀ ਸੁਨੇਹੇ ਦੀ ਰਿਪੋਰਟ ਕਰ ਰਿਹਾ ਹਾਂ। ਸੁਨੇਹਾ: "{text}"।
 
-ShieldAI ਜਾਂਚ ਅਨੁਸਾਰ ਇਹ {category} ਦੇ ਲੱਛਣ ਦਿਖਾਉਂਦਾ ਹੈ। ਕਾਰਵਾਈ ਦੀ ਬੇਨਤੀ ਹੈ।`
+ShieldAI ਜਾਂਚ ਅਨੁਸਾਰ ਇਹ {category} ਦੇ ਲੱਛਣ ਦਿਖਾਉਂਦਾ ਹੈ। ਕਾਰਵਾਈ ਦੀ ਬੇਨਤੀ ਹੈ।`,
+    currency_title: "AI ਨਕਲੀ ਕਰੰਸੀ ਪਛਾਣ ਅਤੇ ਜਾਂਚ",
+    currency_subtitle: "ਕੰਪਿਊਟਰ ਵਿਜ਼ਨ ਰਾਹੀਂ ਭਾਰਤੀ ਨੋਟਾਂ ਦੇ ਸੁਰੱਖਿਆ ਫੀਚਰਾਂ ਦੀ ਪੜਤਾਲ।",
+    currency_tag_1: "ਸੁਰੱਖਿਅਤ ਇਮੇਜ ਪ੍ਰੋਸੈਸਿੰਗ",
+    currency_tag_2: "ਵਿਜ਼ਨ ਇੰਜਣ ਤਿਆਰ",
+    currency_tag_3: "ਮੁਢਲੀ ਜਾਂਚ",
+    network_title: "AI ਸਾਈਬਰ ਧੋਖਾਧੜੀ ਨੈੱਟਵਰਕ ਵਿਸ਼ਲੇਸ਼ਣ",
+    network_subtitle: "ਸ਼ੱਕੀ ਨੰਬਰਾਂ ਅਤੇ ਧੋਖਾਧੜੀ ਗਿਰੋਹਾਂ ਦੇ ਨੈੱਟਵਰਕ ਦਾ ਪਰਦਾਫਾਸ਼ ਕਰੋ।",
+    geospatial_title: "ਭੂਗੋਲਿਕ ਸਾਈਬਰ ਅਪਰਾਧ ਵਿਸ਼ਲੇਸ਼ਣ ਨਕਸ਼ਾ",
+    geospatial_subtitle: "ਪੂਰੇ ਭਾਰਤ ਵਿੱਚ ਸਾਈਬਰ ਅਪਰਾਧ ਖੇਤਰਾਂ ਦਾ ਲਾਈਵ ਨਕਸ਼ਾ।",
+    command_title: "ਪੁਲਿਸ ਜਾਂਚ ਅਤੇ ਕਮਾਂਡ ਡੈਸ਼ਬੋਰਡ",
+    command_subtitle: "ਜਾਂਚ ਅਤੇ ਸ਼ੱਕੀਆਂ ਦੀ ਨਿਗਰਾਨੀ ਲਈ ਏਕੀਕ੍ਰਿਤ ਪੁਲਿਸ ਡੈਸ਼ਬੋਰਡ।"
   },
   as: {
     page_title: "এআই নাগৰিক প্ৰতাৰণা প্ৰতিৰোধ শ্বিল্ড",
@@ -914,9 +1057,20 @@ ShieldAI ਜਾਂਚ ਅਨੁਸਾਰ ਇਹ {category} ਦੇ ਲੱਛਣ �
     sev_info: "তথ্যমূলক",
     complaint_narrative_template: `মই {source} ৰ মাধ্যমেৰে পোৱা সন্দেহজনক বাৰ্তাৰ বিষয়ে ৰিপ’ৰ্ট কৰিছোঁ। বাৰ্তা: "{text}"।
 
-ShieldAI পৰীক্ষা অনুসৰি ই {category} ৰ লক্ষণ প্ৰকাশ কৰিছে। অনুগ্ৰহ কৰি বিহিত ব্যৱস্থা লওক।`
+ShieldAI পৰীক্ষা অনুসৰি ই {category} ৰ লক্ষণ প্ৰকাশ কৰিছে। অনুগ্ৰহ কৰি বিহিত ব্যৱস্থা লওক।`,
+    currency_title: "এআই নকল নোট চিনাক্তকৰণ আৰু পৰীক্ষণ",
+    currency_subtitle: "কম্পিউটাৰ ভিজনৰ দ্বাৰা ভাৰতীয় নোটৰ সুৰক্ষা বৈশিষ্ট্য পৰীক্ষা।",
+    currency_tag_1: "সুৰক্ষিত প্ৰতিচ্ছবি প্ৰক্ৰিয়াকৰণ",
+    currency_tag_2: "ভিজন ইঞ্জিন প্ৰস্তুত",
+    currency_tag_3: "প্ৰাৰম্ভিক পৰীক্ষা",
+    network_title: "এআই প্ৰতাৰণা নেটৱৰ্ক বিশ্লেষণ",
+    network_subtitle: "সন্দেহজনক নম্বৰ আৰু প্ৰতাৰক চক্র উদ্ঘাটন কৰক।",
+    geospatial_title: "ভৌগোলিক অপৰাধ বিশ্লেষণ মানচিত্ৰ",
+    geospatial_subtitle: "ভাৰতজুৰি চাইবাৰ অপৰাধ প্ৰৱণ অঞ্চলৰ মানচিত্ৰ।",
+    command_title: "পুলিচ তদন্ত আৰু কমাণ্ড ড্যাশবৰ্ড",
+    command_subtitle: "তদন্ত আৰু অপৰাধীৰ ওপৰত চকু ৰাখিবলৈ সংহত ব্যৱস্থা।"
   },
-  // Fallbacks for remaining scheduled languages mapping to nearest region or English base
+  // Fallbacks for remaining scheduled languages
   mai: null as any, sa: null as any, kok: null as any, ne: null as any,
   sd: null as any, doi: null as any, mni: null as any, brx: null as any,
   sat: null as any, ks: null as any
@@ -925,5 +1079,5 @@ ShieldAI পৰীক্ষা অনুসৰি ই {category} ৰ লক্�
 // Populate fallbacks dynamically for remaining regional languages
 const fallbackLangs: LanguageCode[] = ["mai", "sa", "kok", "ne", "sd", "doi", "mni", "brx", "sat", "ks"]
 fallbackLangs.forEach(code => {
-  translations[code] = { ...translations.hi } // Use Hindi as natural fallback for Devanagari & regional Indian scripts
+  translations[code] = { ...translations.hi }
 })

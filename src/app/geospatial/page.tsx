@@ -15,6 +15,7 @@ import {
   RegionalIntelligenceBrief
 } from "@/lib/types/geospatial"
 import { filterGeospatialData, MOCK_TREND_DATA } from "@/lib/services/geospatial"
+import { useLanguage } from "@/lib/i18n/language-context"
 import { Map, ShieldCheck, Lock } from "lucide-react"
 
 // Dynamically import the map component with SSR disabled
@@ -40,6 +41,7 @@ const DEFAULT_FILTERS: GeospatialFilterState = {
 }
 
 export default function GeospatialPage() {
+  const { t } = useLanguage()
   const [filters, setFilters] = useState<GeospatialFilterState>(DEFAULT_FILTERS)
   const [isApplying, setIsApplying] = useState(true)
   const [hotspots, setHotspots] = useState<CrimeHotspot[]>([])
@@ -104,9 +106,9 @@ export default function GeospatialPage() {
           {/* Header & Badges */}
           <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between border-b border-shield-cyan/10 pb-4 gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">Geospatial Crime Intelligence</h1>
+              <h1 className="text-2xl font-bold text-white tracking-tight">{t("geospatial_title")}</h1>
               <p className="mt-1 max-w-3xl text-sm text-shield-muted">
-                Visualize cybercrime concentration, identify emerging threat zones, and generate explainable deployment intelligence across regions.
+                {t("geospatial_subtitle")}
               </p>
             </div>
             

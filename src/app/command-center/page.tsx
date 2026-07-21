@@ -20,6 +20,7 @@ import {
   AnalyticsDistribution, 
   InvestigationStatusCounts 
 } from "@/lib/types/command-center"
+import { useLanguage } from "@/lib/i18n/language-context"
 import { Activity, ShieldCheck, Lock } from "lucide-react"
 
 // Dynamically import the map component with SSR disabled
@@ -37,6 +38,7 @@ const UnifiedThreatMap = dynamic(
 )
 
 export default function CommandCenterPage() {
+  const { t } = useLanguage()
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null)
   const [cases, setCases] = useState<CommandCase[]>([])
   const [activity, setActivity] = useState<CrossModuleActivity[]>([])
@@ -88,9 +90,9 @@ export default function CommandCenterPage() {
           <div className="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between border-b border-shield-cyan/10 pb-4 gap-4">
             <div>
               <div className="text-[10px] uppercase font-bold tracking-wider text-shield-cyan mb-2">Authorized Investigation Workspace</div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">ShieldAI Investigation Command Center</h1>
+              <h1 className="text-2xl font-bold text-white tracking-tight">{t("command_title")}</h1>
               <p className="mt-1 max-w-3xl text-sm text-shield-muted">
-                Unified AI-assisted intelligence for case prioritization, threat monitoring, and coordinated human investigation.
+                {t("command_subtitle")}
               </p>
             </div>
             
