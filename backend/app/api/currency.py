@@ -114,7 +114,7 @@ async def analyze_currency(
         
         # Analyze
         mime_type = file.content_type or "image/jpeg"
-        verdict = currency_ai_service.analyze(file_path, mime_type, denomination)
+        verdict = currency_ai_service.analyze(file_path, mime_type, denomination, note_side)
         
         # Save session to shared store
         session_obj = CurrencyAnalysisResult(**verdict)

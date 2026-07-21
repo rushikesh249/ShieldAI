@@ -63,6 +63,11 @@ class RecommendationEngine:
             recs.add("Do not share your PAN, Aadhaar, or bank details.")
             recs.add("Contact your bank's official customer care number directly.")
 
+        elif category == "Unknown / Requires Review":
+            recs.add("Exercise caution before responding to or clicking links from unverified senders.")
+            recs.add("Do not share personal, financial, or authentication details (OTPs/PINs).")
+            recs.add("Verify the identity of the sender through official channels before proceeding.")
+
         # Default fallback
         if not recs:
             recs.add("Block the sender and ignore the communication.")

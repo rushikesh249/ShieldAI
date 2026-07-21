@@ -1,7 +1,7 @@
 "use client"
 
 import { AnalysisState, ThreatVerdict } from "@/lib/types/citizen"
-import { ShieldCheck, Loader2, Info, CheckCircle2 } from "lucide-react"
+import { ShieldCheck, Loader2, Info, CheckCircle2, AlertTriangle } from "lucide-react"
 
 interface Props {
   state: AnalysisState
@@ -20,6 +20,7 @@ export function AnalysisWorkspace({ state, verdict }: Props) {
   const isIdle = state === "idle"
   const isAnalyzing = state !== "idle" && state !== "complete" && state !== "error"
   const isComplete = state === "complete" && verdict !== null
+  const isError = state === "error"
 
   return (
     <div className="flex flex-col min-h-[400px] lg:min-h-[560px] h-fit rounded-xl border border-shield-cyan/15 bg-shield-navy-light/80 p-5 shadow-2xl shadow-shield-cyan/5 backdrop-blur-sm sm:p-6">
@@ -34,6 +35,7 @@ export function AnalysisWorkspace({ state, verdict }: Props) {
           {isIdle && <span className="flex items-center gap-1.5 rounded-full border border-shield-cyan/20 bg-shield-cyan/10 px-2 py-0.5 text-[10px] font-medium text-shield-cyan"><span className="h-1.5 w-1.5 rounded-full bg-shield-cyan" /> Ready</span>}
           {isAnalyzing && <span className="flex items-center gap-1.5 rounded-full border border-shield-warning/20 bg-shield-warning/10 px-2 py-0.5 text-[10px] font-medium text-shield-warning"><Loader2 className="h-3 w-3 animate-spin" /> Processing</span>}
           {isComplete && <span className="flex items-center gap-1.5 rounded-full border border-shield-safe/20 bg-shield-safe/10 px-2 py-0.5 text-[10px] font-medium text-shield-safe"><CheckCircle2 className="h-3 w-3" /> Complete</span>}
+          {isError && <span className="flex items-center gap-1.5 rounded-full border border-shield-critical/20 bg-shield-critical/10 px-2 py-0.5 text-[10px] font-medium text-shield-critical"><AlertTriangle className="h-3 w-3" /> Error</span>}
         </div>
       </div>
 
@@ -47,6 +49,19 @@ export function AnalysisWorkspace({ state, verdict }: Props) {
             <h3 className="text-lg font-semibold text-white">ShieldAI Intelligence Engine Ready</h3>
             <p className="mt-2 max-w-sm text-sm text-shield-muted">
               Submit suspicious content to receive explainable risk intelligence, detected indicators, and recommended safety actions.
+            </p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {isError && (
+          <div className="flex flex-col items-center text-center py-8">
+            <div className="mb-4 rounded-full bg-shield-critical/10 p-4 ring-1 ring-shield-critical/30">
+              <AlertTriangle className="h-10 w-10 text-shield-critical" />
+            </div>
+            <h3 className="text-lg font-semibold text-white">Analysis Could Not Complete</h3>
+            <p className="mt-2 max-w-sm text-sm text-shield-muted">
+              {verdict?.assessment || "An error occurred while communicating with the analysis pipeline. Please check connection and try again."}
             </p>
           </div>
         )}
@@ -118,3 +133,4 @@ export function AnalysisWorkspace({ state, verdict }: Props) {
     </div>
   )
 }
+

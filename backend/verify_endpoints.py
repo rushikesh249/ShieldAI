@@ -45,4 +45,4 @@ r = httpx.get(BASE + "/docs")
 print(f"\n=== Swagger UI ===")
 print(f"  GET /docs: {r.status_code}")
 
-print("\n✅ All endpoints verified!")
+print("\n[OK] All endpoints verified!")

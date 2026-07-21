@@ -34,6 +34,10 @@ class AIRiskEngine:
         high_count = sum(1 for e in evidence if getattr(e, "severity", "") == "High")
         medium_count = sum(1 for e in evidence if getattr(e, "severity", "") == "Medium")
 
+        # If category requires review or is unknown, ensure minimum Caution score (at least 45)
+        if category == "Unknown / Requires Review":
+            score = max(score, 45)
+
         # Apply deterministic bounds
         if critical_count > 0:
             score = max(score, 90)

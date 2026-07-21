@@ -60,18 +60,17 @@ class NetworkAIService:
         key_patterns = ["Standard transaction flow."]
         
         try:
-            # We can use the base model with an overridden prompt by injecting system prompt in contents
-            # if we don't want to create a whole new generative model instance.
-            import google.generativeai as genai
-            from app.core.config import get_settings
-            settings = get_settings()
-            
-            temp_model = genai.GenerativeModel(
-                model_name=getattr(settings, "gemini_model", "gemini-1.5-flash"),
+            from google.genai import types
+            config = types.GenerateContentConfig(
+                response_mime_type="application/json",
                 system_instruction=SYSTEM_PROMPT,
-                generation_config=genai.types.GenerationConfig(response_mime_type="application/json")
+                temperature=0.0
             )
-            response = temp_model.generate_content([prompt])
+            response = self.gemini.client.models.generate_content(
+                model=self.gemini.model_name,
+                contents=[prompt],
+                config=config
+            )
             ai_res = json.loads(response.text)
             
             overview = ai_res.get("overview", overview)

@@ -2,22 +2,31 @@ import pytest
 from unittest.mock import patch, MagicMock
 
 @pytest.fixture
-def mock_tf_service():
-    with patch("app.services.currency_ai.CurrencyAIService._predict_tf") as mock:
-        mock.return_value = ("Fake", 0.95)
+def mock_validation_service():
+    with patch("app.services.currency_ai.CurrencyAIService._validate_image_with_gemini") as mock:
+        mock.return_value = {
+            "is_single_indian_note": True,
+            "detected_category": "Indian Currency Note",
+            "detected_denomination": "₹500",
+            "detected_side": "Front",
+            "quality_status": "Sufficient",
+            "validation_reason": "Single valid Indian ₹500 note detected."
+        }
         yield mock
 
 @pytest.fixture
-def mock_gemini_service():
-    with patch("app.services.currency_ai.CurrencyAIService._analyze_gemini") as mock:
+def mock_forensic_service():
+    with patch("app.services.currency_ai.CurrencyAIService._analyze_forensics_with_gemini") as mock:
         mock.return_value = {
+            "verdict": "Suspicious",
+            "summary_explanation": "Windowed security thread appears drawn on.",
             "features": [
                 {
                     "id": "sec_thread",
-                    "name": "Security Thread",
+                    "name": "Windowed Security Thread",
                     "status": "Inconsistency",
-                    "observation": "Looks drawn",
-                    "confidence": 99,
+                    "observation": "Thread is drawn on and does not color shift.",
+                    "confidence": 95,
                     "boundingBox": {"x": 0.5, "y": 0.5, "width": 0.1, "height": 0.1}
                 }
             ],
@@ -26,7 +35,7 @@ def mock_gemini_service():
         yield mock
 
 
-def test_currency_analyze_mocked(client, mock_tf_service, mock_gemini_service, tmp_path):
+def test_currency_analyze_mocked(client, mock_validation_service, mock_forensic_service, tmp_path):
     # Create a dummy image file
     img_path = tmp_path / "test.jpg"
     img_path.write_bytes(b"dummy image content")

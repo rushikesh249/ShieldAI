@@ -46,15 +46,14 @@ class GeoAIService:
         # Only process the top 5 to save time/tokens. The rest get deterministic fallbacks.
         top_hotspots = hotspots[:5]
         
-        import google.generativeai as genai
-        from app.core.config import get_settings
-        settings = get_settings()
+        from app.services.gemini import gemini_service
+        from google.genai import types
         
         try:
-            model = genai.GenerativeModel(
-                model_name=getattr(settings, "gemini_model", "gemini-1.5-flash"),
+            config = types.GenerateContentConfig(
+                response_mime_type="application/json",
                 system_instruction=SYSTEM_PROMPT,
-                generation_config=genai.types.GenerationConfig(response_mime_type="application/json")
+                temperature=0.0
             )
         except Exception as e:
             logger.error("Failed to initialize Gemini for Geo AI: %s", str(e))
@@ -71,7 +70,11 @@ class GeoAIService:
             )
             
             try:
-                response = model.generate_content([prompt])
+                response = gemini_service.client.models.generate_content(
+                    model=gemini_service.model_name,
+                    contents=[prompt],
+                    config=config
+                )
                 ai_res = json.loads(response.text)
                 
                 # We can also cross-check via Risk Engine

@@ -38,7 +38,7 @@
   --shield-glow: rgba(0, 212, 255, 0.08);
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
