@@ -493,7 +493,7 @@ We welcome contributions! Please read our contributing guidelines before submitt
 
 ## 📧 Contact
 
-For any inquiries regarding this hackathon submission, please reach out to the team lead at `[Insert Email]`.
+For any inquiries regarding this hackathon submission, please reach out to the team lead at `[rushikesh.ambhore24@vit.edu]`.
 
 <div align="center">
   <p>Built with ❤️ for a Safer Digital India.</p>
