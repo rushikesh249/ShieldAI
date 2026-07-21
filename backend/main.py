@@ -25,5 +25,6 @@ if __name__ == "__main__":
         host=settings.host,
         port=settings.port,
         reload=settings.is_development,
+        reload_dirs=["app"] if settings.is_development else None,
         log_level=settings.log_level.lower(),
     )

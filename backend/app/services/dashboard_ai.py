@@ -39,14 +39,8 @@ class DashboardAIService:
     
     def __init__(self) -> None:
         self.settings = get_settings()
-        import google.generativeai as genai
-        genai.configure(api_key=self.settings.gemini_api_key)
-        
-        # Use gemini-1.5-flash since we only need text JSON generation
-        self.model = genai.GenerativeModel(
-            model_name=self.settings.gemini_model,
-            generation_config={"response_mime_type": "application/json"}
-        )
+        from app.services.gemini import gemini_service
+        self.gemini = gemini_service
 
     def _get_module_health(self) -> List[ModuleHealth]:
         return [
@@ -90,7 +84,15 @@ class DashboardAIService:
         prompt = DASHBOARD_AI_PROMPT.replace("{metrics_json}", json.dumps(payload, indent=2))
         
         try:
-            response = self.model.generate_content(prompt)
+            from google.genai import types
+            response = self.gemini.client.models.generate_content(
+                model=self.gemini.model_name,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    response_mime_type="application/json",
+                    temperature=0.0
+                )
+            )
             result_text = response.text
             data = json.loads(result_text)
             

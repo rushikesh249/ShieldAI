@@ -6,7 +6,8 @@ import {
   FraudCluster, 
   EvidenceTimelineEvent, 
   InvestigationRecommendation, 
-  InvestigationSummary 
+  InvestigationSummary,
+  EntityType
 } from "@/lib/types/network"
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
@@ -275,7 +276,7 @@ export async function analyzeNetworkDataset(
       entities.push({
         id,
         label: id,
-        type: data.type || "Unknown Entity",
+        type: (data.type as EntityType) || "Unknown Entity",
         riskLevel: (data.riskLevel as "High"|"Medium"|"Low"|"Unknown") || "Unknown",
         riskScore: data.riskScore || 0,
         x,
