@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { CommandCase } from "@/lib/types/command-center"
-import { AlertCircle, Clock, MapPin } from "lucide-react"
+import { AlertCircle, MapPin } from "lucide-react"
 
 interface Props {
   cases: CommandCase[]

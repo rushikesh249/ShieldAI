@@ -52,6 +52,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const saved = localStorage.getItem("shieldai_language") as LanguageCode
     if (saved && INDIAN_LANGUAGES.some(l => l.code === saved)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLanguageState(saved)
     }
   }, [])
@@ -60,7 +61,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     setLanguageState(code)
     try {
       localStorage.setItem("shieldai_language", code)
-    } catch (_e) {
+    } catch {
       // localStorage may be disabled
     }
   }

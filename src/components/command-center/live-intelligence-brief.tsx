@@ -1,7 +1,7 @@
 "use client"
 
 import { CommandCase } from "@/lib/types/command-center"
-import { ShieldAlert, Map, Clock, AlertCircle, FileText, CheckCircle2, Crosshair, ArrowRight, Network } from "lucide-react"
+import { ShieldAlert, AlertCircle, FileText, CheckCircle2, Crosshair, ArrowRight, Network } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface Props {

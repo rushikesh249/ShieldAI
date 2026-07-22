@@ -1,6 +1,6 @@
 "use client"
 
-import { CrimeHotspot, RegionalIntelligenceBrief } from "@/lib/types/geospatial"
+import { RegionalIntelligenceBrief } from "@/lib/types/geospatial"
 import { X, Printer, Download, FileText, AlertCircle, ShieldAlert } from "lucide-react"
 import { ShieldAILogo } from "@/components/shield-logo"
 import { Button } from "@/components/ui/button"

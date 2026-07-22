@@ -5,7 +5,7 @@ import { MapContainer, TileLayer, Marker, Tooltip, useMap } from "react-leaflet"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
 import { CrimeHotspot } from "@/lib/types/geospatial"
-import { Layers, Map as MapIcon, ShieldAlert } from "lucide-react"
+import { Layers, Map as MapIcon } from "lucide-react"
 
 interface Props {
   hotspots: CrimeHotspot[]

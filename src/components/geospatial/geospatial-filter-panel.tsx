@@ -4,7 +4,7 @@ import { useState } from "react"
 import { GeospatialFilterState, ThreatCategory, RiskLevel, TimeRange } from "@/lib/types/geospatial"
 import { INDIAN_STATES } from "@/lib/services/geospatial"
 import { Button } from "@/components/ui/button"
-import { SlidersHorizontal, MapPin, AlertTriangle, Clock, Target, RotateCcw, X } from "lucide-react"
+import { SlidersHorizontal, MapPin, AlertTriangle, Clock, Target, RotateCcw } from "lucide-react"
 
 interface Props {
   initialState: GeospatialFilterState

@@ -1,13 +1,12 @@
 "use client"
 
 import { useState, useRef, MouseEvent as ReactMouseEvent } from "react"
-import { InvestigationDataset, NetworkAnalysisState, FraudEntity } from "@/lib/types/network"
+import { InvestigationDataset, NetworkAnalysisState } from "@/lib/types/network"
 import { 
   Network, 
   Search, 
   ZoomIn, 
   ZoomOut, 
-  Maximize, 
   RefreshCw, 
   Filter, 
   Download,
@@ -27,7 +26,6 @@ interface Props {
 }
 
 export function NetworkGraphWorkspace({ dataset, state, selectedEntityId, onSelectEntity }: Props) {
-  const isIdle = state === "idle" || state === "error"
   const isAnalyzing = state !== "idle" && state !== "complete" && state !== "error"
   const isComplete = state === "complete" && dataset !== null
 

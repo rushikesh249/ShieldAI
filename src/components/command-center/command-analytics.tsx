@@ -1,7 +1,7 @@
 "use client"
 
 import { AnalyticsTrendPoint, AnalyticsDistribution, InvestigationStatusCounts } from "@/lib/types/command-center"
-import { BarChart, PieChart, CheckSquare, Activity } from "lucide-react"
+import { PieChart, CheckSquare, Activity } from "lucide-react"
 
 interface Props {
   trends: AnalyticsTrendPoint[]

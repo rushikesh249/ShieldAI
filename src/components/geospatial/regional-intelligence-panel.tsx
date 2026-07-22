@@ -1,7 +1,7 @@
 "use client"
 
 import { CrimeHotspot } from "@/lib/types/geospatial"
-import { Map, AlertTriangle, ShieldAlert, BarChart3, TrendingUp, TrendingDown, Minus, Target, Download, FileText } from "lucide-react"
+import { Map, ShieldAlert, BarChart3, TrendingUp, TrendingDown, Minus, Target, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface Props {

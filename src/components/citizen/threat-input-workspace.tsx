@@ -110,7 +110,7 @@ export function ThreatInputWorkspace({ input, onInputChange, onAnalyze, isAnalyz
       recognitionRef.current.start()
       setIsRecording(true)
       setRecordingError(null)
-    } catch (_err) {
+    } catch {
       setRecordingError("Microphone permission denied or unavailable.")
     }
   }

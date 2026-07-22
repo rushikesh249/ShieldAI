@@ -1071,9 +1071,9 @@ ShieldAI পৰীক্ষা অনুসৰি ই {category} ৰ লক্�
     command_subtitle: "তদন্ত আৰু অপৰাধীৰ ওপৰত চকু ৰাখিবলৈ সংহত ব্যৱস্থা।"
   },
   // Fallbacks for remaining scheduled languages
-  mai: null as any, sa: null as any, kok: null as any, ne: null as any,
-  sd: null as any, doi: null as any, mni: null as any, brx: null as any,
-  sat: null as any, ks: null as any
+  mai: null as unknown as Record<TranslationKey, string>, sa: null as unknown as Record<TranslationKey, string>, kok: null as unknown as Record<TranslationKey, string>, ne: null as unknown as Record<TranslationKey, string>,
+  sd: null as unknown as Record<TranslationKey, string>, doi: null as unknown as Record<TranslationKey, string>, mni: null as unknown as Record<TranslationKey, string>, brx: null as unknown as Record<TranslationKey, string>,
+  sat: null as unknown as Record<TranslationKey, string>, ks: null as unknown as Record<TranslationKey, string>
 }
 
 // Populate fallbacks dynamically for remaining regional languages

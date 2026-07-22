@@ -8,7 +8,7 @@ const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
  * This function simulates an AI vision pipeline inspecting currency security features.
  * Replace this with actual calls to TensorFlow.js or Gemini Vision API in the future.
  */
-function generateFallbackCurrencyResult(input: CurrencyInput): CurrencyAnalysisResult {
+function generateFallbackCurrencyResult(): CurrencyAnalysisResult {
   return {
     riskLevel: "Review Recommended",
     confidenceScore: 84,
@@ -94,7 +94,7 @@ export async function analyzeCurrency(
     await sleep(200)
 
     onStateChange("complete")
-    return generateFallbackCurrencyResult(input)
+    return generateFallbackCurrencyResult()
   }
 }
 

@@ -1,15 +1,13 @@
 "use client"
 
-import { InvestigationDataset, FraudEntity } from "@/lib/types/network"
+import { InvestigationDataset } from "@/lib/types/network"
 import { 
   ShieldCheck, 
   Activity, 
   AlertTriangle, 
-  ArrowRight, 
   FileText, 
   GitBranch, 
   Download,
-  AlertCircle,
   Network
 } from "lucide-react"
 

@@ -3,7 +3,6 @@
 import { CrimeHotspot, GeospatialAnalyticsSummary, ThreatTrendDataPoint } from "@/lib/types/geospatial"
 import { 
   AlertCircle, 
-  MapPin, 
   Activity, 
   Clock, 
   ShieldAlert, 
