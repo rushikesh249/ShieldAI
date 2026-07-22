@@ -42,3 +42,25 @@ next-env.d.ts
 
 # temp files
 .tmp/
+
+# python
+venv/
+__pycache__/
+.pytest_cache/
+
+# build/output
+dist/
+build/
+uploads/
+
+# logs
+*.log
+
+# editor cache
+.vscode/
+.idea/
+*.swp
+
+# os files
+Thumbs.db
+.DS_Store
