@@ -42,12 +42,10 @@ ShieldAI is a unified, hybrid-AI intelligence platform designed to combat the ex
 - [Installation](#installation)
 - [Environment Variables](#environment-variables)
 - [API Documentation](#api-documentation)
-- [Screenshots & Demos](#screenshots--demos)
 - [Performance Metrics](#performance-metrics)
 - [Testing](#testing)
 - [Deployment Architecture](#deployment-architecture)
 - [Roadmap](#roadmap)
-- [Team](#team)
 
 ---
 
@@ -388,20 +386,6 @@ Standard JSON Envelope for all responses:
 
 ---
 
-## 📸 Screenshots & Demos
-
-> *Placeholders for Final Presentation Media*
-
-| Landing Page | Citizen Fraud Shield | Fraud Network Graph |
-|:---:|:---:|:---:|
-| ![Landing Setup](https://via.placeholder.com/400x250/0f172a/00d4ff?text=Landing+Page) | ![Citizen UI](https://via.placeholder.com/400x250/0f172a/00d4ff?text=Citizen+Fraud+Shield) | ![Network Graph](https://via.placeholder.com/400x250/0f172a/00d4ff?text=NetworkX+Graph) |
-
-| Command Dashboard | Geospatial Map | Currency Verification |
-|:---:|:---:|:---:|
-| ![Command Center](https://via.placeholder.com/400x250/0f172a/00d4ff?text=Command+Center) | ![Geo Hotspots](https://via.placeholder.com/400x250/0f172a/00d4ff?text=Geospatial+Map) | ![Currency Vision](https://via.placeholder.com/400x250/0f172a/00d4ff?text=Currency+Verification) |
-
----
-
 ## 📊 Performance Metrics
 
 | Metric | Target | Current Implementation |
@@ -456,18 +440,6 @@ Standard JSON Envelope for all responses:
 - [ ] JWT Authentication & Role Based Access Control
 - [ ] Supabase Database Integration
 - [ ] Predictive AI Agents for proactive threat hunting
-
----
-
-## 👥 Team
-
-<div align="center">
-  
-| <img src="https://via.placeholder.com/100" width="100" style="border-radius:50%"/> | <img src="https://via.placeholder.com/100" width="100" style="border-radius:50%"/> | <img src="https://via.placeholder.com/100" width="100" style="border-radius:50%"/> |
-|:---:|:---:|:---:|
-| **[Team Member 1]**<br>Full Stack Engineer | **[Team Member 2]**<br>AI/ML Engineer | **[Team Member 3]**<br>UI/UX Designer |
-
-</div>
 
 ---
 
